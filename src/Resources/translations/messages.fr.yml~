@@ -1,0 +1,28 @@
+'#': '#'
+active: Actif
+Admin: Administrateur
+Add user: Ajouter un utilisateur
+'Back to website': 'Retourner au site web'
+disabled: Désactivé
+Email: Email
+ID: ID
+Plain password: Mot de passe
+Role: Rôle
+'Role key': Rôle
+'Updated at': 'Mise à jour le'
+User: Utilisateur
+Users: Utilisateurs
+Username: 'Nom d''utilisateur'
+user.list.title: 'Liste des utilisateurs'
+user.list.help: ''
+user.new.title: Ajouter un utilisateur
+user.new.help: ''
+user.edit.title: Modifier un utilisateur
+user.edit.help: ''
+user.form.basic.title: Information principales
+user.form.basic.help: ''
+user.form.admin.title: Administration
+user.form.admin.help: ''
+user.show.title: 'Fiche utilisateur'
+user.show.help: ''
+wait_validation: En attente de validation

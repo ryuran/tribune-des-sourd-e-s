@@ -1,0 +1,7 @@
+{# app/Resources/views/easy_admin/tag_collection.html.twig #}
+
+{% set colors = field_options.label_colors|default(['primary']) %}
+
+{% for tag in value %}
+    <span class="label label-{{ cycle(colors, loop.index) }}">{{ tag }}</span>
+{% endfor %}

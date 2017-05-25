@@ -1,0 +1,31 @@
+'#': '#'
+active: Actif
+admin: Administrateur
+'Add user': 'Ajouter un utilisateur'
+disabled: Désactivé
+Email: Email
+ID: ID
+'Plain password': 'Mot de passe'
+Role: Rôle
+'Role name': Rôle
+State: Statut
+'State name': Statut
+'Updated at': 'Mise à jour le'
+user: Utilisateur
+User: Utilisateur
+Users: Utilisateurs
+Username: 'Nom d''utilisateur'
+wait_validation: 'En attente de validation'
+###########################################################"
+list.title: 'Liste des utilisateurs'
+list.help: ''
+new.title: 'Ajouter un utilisateur'
+new.help: ''
+edit.title: 'Modifier un utilisateur'
+edit.help: ''
+form.basic.title: 'Information principales'
+form.basic.help: ''
+form.admin.title: Administration
+form.admin.help: ''
+show.title: 'Fiche utilisateur'
+show.help: ''
