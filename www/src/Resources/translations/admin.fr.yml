@@ -5,36 +5,57 @@ action.delete: Supprimer
 action.edit: Modifier
 action.list: 'Retour à la liste'
 action.new: Ajouter
-action.save: Sauvegarder les modification
+action.save: 'Sauvegarder les modification'
 action.search: Rechercher
 action.show: Voir
 admin: Administrateur
 Article: Reportage
 Articles: Reportages
 article.list.title: 'Liste des reportages'
-article.list.help: ''
 article.new.title: 'Ajouter un reportage'
-article.new.help: ''
 article.edit.title: 'Modifier un reportage'
-article.edit.help: ''
 article.show.title: Reportage
-article.show.help: ''
 Author: Auteur
 'Back to website': 'Retourner au site web'
+Category: Catégorie
+Categories: Catégories
+category.list.title: 'Liste des catégories'
+category.new.title: 'Ajouter un catégorie'
+category.edit.title: 'Modifier un catégorie'
+category.show.title: Catégorie
+Created at: Créé le
 Description: Description
 disabled: Désactivé
 Email: Email
-Favorite count: Nb. favoris
+Favorite: Favori
+Favorites: Favoris
+'Favorite count': 'Nb. favoris'
 ID: ID
-Image url: URL de l'image
+'Image url': 'URL de l''image'
+'Image name': 'Nom de l''image'
+Message: Message
+Messages: Messages
+Name: Nom
 'Plain password': 'Mot de passe'
 Report: Reportage
 Reports: Reportages
 Role: Rôle
+Room: Salon
+Rooms: Salons
+room.list.title: 'Liste des salons'
+room.new.title: 'Ajouter un salon'
+room.edit.title: 'Modifier un salon'
+room.show.title: Salon
 'Role name': Rôle
 State: Statut
 'State name': Statut
-Source url: URL de la source
+'Source url': 'URL de la source'
+Tag: Tag
+Tags: Tags
+tag.list.title: 'Liste des tags'
+tag.new.title: 'Ajouter un tag'
+tag.edit.title: 'Modifier un tag'
+tag.show.title: Tag
 Title: Titre
 'Updated at': 'Mise à jour le'
 user: Utilisateur
@@ -42,17 +63,12 @@ User: Utilisateur
 Users: Utilisateurs
 Username: 'Nom d''utilisateur'
 user.list.title: 'Liste des utilisateurs'
-user.list.help: ''
 user.new.title: 'Ajouter un utilisateur'
-user.new.help: ''
 user.edit.title: 'Modifier un utilisateur'
-user.edit.help: ''
 user.form.basic.title: 'Information principales'
-user.form.basic.help: ''
 user.form.admin.title: Administration
-user.form.admin.help: ''
 user.show.title: 'Fiche utilisateur'
 user.show.help: ''
-Video url: URL de la vidéo
-View count: Nb. vues
+'Video url': 'URL de la vidéo'
+'View count': 'Nb. vues'
 wait_validation: 'En attente de validation'

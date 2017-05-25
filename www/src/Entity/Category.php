@@ -37,7 +37,7 @@ class Category
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="categories")
      */
     private $articles;
     /**

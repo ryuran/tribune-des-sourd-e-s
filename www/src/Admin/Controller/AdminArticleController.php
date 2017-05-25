@@ -1,8 +1,7 @@
 <?php
-namespace App\Controller;
+namespace App\Admin\Controller;
 
 use App\Entity\Article;
-use App\Entity\User;
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
 class AdminArticleController extends BaseAdminController

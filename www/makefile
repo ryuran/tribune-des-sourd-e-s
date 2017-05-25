@@ -38,3 +38,8 @@ init:
 	# if this doesn't work, try adding `-n` option
 	sudo setfacl -R -m u:"$$HTTPDUSER":rwX -m u:`whoami`:rwX var
 	sudo setfacl -dR -m u:"$$HTTPDUSER":rwX -m u:`whoami`:rwX var
+
+install:
+	bin/composer install
+	bin/console doctrine:database:create
+	bin/console doctrine:schema:update --force

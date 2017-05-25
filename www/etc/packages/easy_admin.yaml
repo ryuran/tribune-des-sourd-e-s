@@ -1,0 +1,175 @@
+easy_admin:
+    site_name: '[Admin] La Tribune des Sourds Insoumis'
+    translation_domain: admin
+    design:
+        brand_color: '#C9462C'
+        color_scheme: 'dark'
+        form_theme: 'vertical'
+        assets:
+            css: []
+            js: []
+        menu:
+            - { label: 'Back to website', route: 'index', icon: 'home' }
+            - { label: 'Users' }
+            - { entity: 'User', label: 'Users', icon: 'user' }
+            - { entity: 'Room', label: 'Rooms', icon: 'comments' }
+            - { label: 'Articles' }
+            - { entity: 'Article', label: 'Reports', icon: 'youtube-play' }
+            - { entity: 'Category', label: 'Categories', icon: 'folder' }
+            - { entity: 'Tag', label: 'Tags', icon: 'tags' }
+    entities:
+        User:
+            class: App\Entity\User
+            label: 'Users'
+            disabled_actions: ['delete']
+            controller: App\Admin\Controller\AdminUserController
+            list:
+                title: 'user.list.title'
+                fields:
+                    - username
+                    - email
+                    - { property: stateName, template: 'easy_admin/translated' }
+                    - { property: roleName, template: 'easy_admin/translated' }
+                    - { property: updatedAt, format: 'd/m/Y' }
+                sort: ['updatedAt', 'DESC']
+                actions: ['show', 'edit', 'new', 'search']
+            new:
+                title: 'user.new.title'
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
+                    - { property: username }
+                    - { property: email }
+                    - { type: 'divider' }
+                    - { property: plainPassword, type: 'password', type_options: { required: true } }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
+                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true } }
+                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true } }
+            edit:
+                title: 'user.edit.title'
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
+                    - { property: username }
+                    - { property: email }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
+                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true } }
+                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true } }
+            show:
+                title: 'user.show.title'
+                fields:
+                    - id
+                    - username
+                    - email
+                    - { property: stateName, template: 'easy_admin/translated' }
+                    - { property: roleName, template: 'easy_admin/translated' }
+                    - { property: 'createdAt', format: 'd/m/Y' }
+                    - { property: 'updatedAt', format: 'd/m/Y' }
+        Room:
+            class: App\Entity\Room
+            label: 'Rooms'
+            list:
+                title: 'room.list.title'
+                sort: ['name', 'ASC']
+                actions: ['show', 'edit', 'new', 'search']
+            form:
+                fields:
+                    - name
+                    - imageName
+            new:
+                title: 'room.new.title'
+            edit:
+                title: 'room.new.title'
+            show:
+                title: 'room.show.title'
+                fields:
+                    - id
+                    - name
+                    - imageName
+        Article:
+            class: App\Entity\Article
+            label: 'Articles'
+            controller: App\Admin\Controller\AdminArticleController
+            list:
+                title: 'article.list.title'
+                fields:
+                    - title
+                    - { property: videoUrl, type: 'url' }
+                    - viewCount
+                    - favoriteCount
+                    - { property: user, label: 'Author' }
+                    - { property: updatedAt, format: 'd/m/Y' }
+                sort: ['updatedAt', 'DESC']
+                actions: ['show', 'edit', 'new', 'search']
+            search:
+                sort: ['title', 'ASC']
+            form:
+                fields:
+                    - { property: videoUrl, type: 'url' }
+                    - title
+                    - categories
+                    - tags
+                    - { property: sourceUrl, type: 'url', type_options: { required: false } }
+                    - { property: imageUrl, type: 'url', type_options: { required: false } }
+                    - { property: description, type_options: { required: false } }
+            new:
+                title: 'article.new.title'
+            edit:
+                title: 'article.new.title'
+            show:
+                title: 'article.show.title'
+                fields:
+                    - id
+                    - { property: videoUrl, type: 'url' }
+                    - title
+                    - categories
+                    - tags
+                    - { property: sourceUrl, type: 'url' }
+                    - { property: imageUrl, type: 'url' }
+                    - description
+                    - viewCount
+                    - favoriteCount
+                    - { property: user, label: 'Author' }
+                    - { property: createdAt, format: 'd/m/Y' }
+                    - { property: updatedAt, format: 'd/m/Y' }
+        Category:
+            class: App\Entity\Category
+            label: 'Categories'
+            list:
+                title: 'category.list.title'
+                sort: ['name', 'ASC']
+                actions: ['show', 'edit', 'new', 'search']
+            form:
+                fields:
+                    - name
+                    - imageName
+            new:
+                title: 'category.new.title'
+            edit:
+                title: 'category.new.title'
+            show:
+                title: 'category.show.title'
+                fields:
+                    - id
+                    - name
+                    - imageName
+                    - articles
+
+        Tag:
+            class: App\Entity\Tag
+            label: 'Tags'
+            list:
+                title: 'tag.list.title'
+                sort: ['name', 'ASC']
+                actions: ['show', 'edit', 'new', 'search']
+            form:
+                fields:
+                    - name
+            new:
+                title: 'tag.new.title'
+            edit:
+                title: 'tag.new.title'
+            show:
+                title: 'tag.show.title'
+                fields:
+                    - id
+                    - name
+                    - articles

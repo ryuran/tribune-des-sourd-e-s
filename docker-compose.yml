@@ -1,0 +1,38 @@
+db:
+  container_name: db
+  image: mysql:latest
+  restart: always
+  volumes:
+    - ./docker/var/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: password
+    TERM: dumb
+
+php:
+  container_name: php
+  build: ./docker/PHP-FPM/
+  restart: always
+  volumes_from:
+    - db
+  links:
+    - db:mysql
+  volumes:
+    - ./www:/var/www/html
+
+nginx:
+  container_name: nginx
+  image: nginx
+  restart: always
+  ports:
+    - 80:80
+  log_driver: syslog
+  volumes_from:
+    - php
+  links:
+    - php
+  volumes:
+    - ./www:/var/www/html:rw
+    - ./docker/NGINX/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./docker/var/log/nginx:/var/log/nginx
+  environment:
+    VIRTUAL_HOST: localhost.dev
