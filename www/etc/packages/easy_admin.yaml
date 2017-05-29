@@ -109,7 +109,7 @@ easy_admin:
                     - tags
                     - { property: sourceUrl, type: 'url', type_options: { required: false } }
                     - { property: imageUrl, type: 'url', type_options: { required: false } }
-                    - { property: description, type_options: { required: false } }
+                    - { property: description, type: 'ckeditor', type_options: { required: false } }
             new:
                 title: 'article.new.title'
             edit:
@@ -134,6 +134,10 @@ easy_admin:
             class: App\Entity\Category
             label: 'Categories'
             list:
+                fields:
+                    - name
+                    - imageName
+                    - articles
                 title: 'category.list.title'
                 sort: ['name', 'ASC']
                 actions: ['show', 'edit', 'new', 'search']
@@ -157,6 +161,9 @@ easy_admin:
             class: App\Entity\Tag
             label: 'Tags'
             list:
+                fields:
+                    - name
+                    - articles
                 title: 'tag.list.title'
                 sort: ['name', 'ASC']
                 actions: ['show', 'edit', 'new', 'search']

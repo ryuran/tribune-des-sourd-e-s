@@ -12,4 +12,5 @@ return [
     'Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle' => ['all' => true],
     'Symfony\Bundle\WebProfilerBundle\WebProfilerBundle' => ['dev' => true, 'test' => true],
     'Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle' => ['all' => true],
+    'Ivory\CKEditorBundle\IvoryCKEditorBundle' => ['all' => true],
 ];
