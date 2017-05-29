@@ -33,6 +33,8 @@ Favorites: Favoris
 ID: ID
 'Image url': 'URL de l''image'
 'Image name': 'Nom de l''image'
+Image: Image
+Link: Lien
 Message: Message
 Messages: Messages
 Name: Nom
@@ -70,5 +72,6 @@ user.form.admin.title: Administration
 user.show.title: 'Fiche utilisateur'
 user.show.help: ''
 'Video url': 'URL de la vidéo'
+Video: Video
 'View count': 'Nb. vues'
 wait_validation: 'En attente de validation'

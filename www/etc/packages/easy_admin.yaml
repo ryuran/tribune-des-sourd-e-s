@@ -92,8 +92,9 @@ easy_admin:
                 title: 'article.list.title'
                 fields:
                     - title
-                    - { property: videoUrl, type: 'url' }
-                    - { property: imageUrl, type: 'image' }
+                    - { property: video, template: 'easy_admin/short_url' }
+                    - { property: image, type: 'image' }
+                    - { property: categories, template: 'easy_admin/tags_collection' }
                     - viewCount
                     - favoriteCount
                     - { property: user, label: 'Author' }
@@ -124,7 +125,7 @@ easy_admin:
                     - categories
                     - tags
                     - { property: sourceUrl, type: 'url' }
-                    - { property: imageUrl, type: 'image' }
+                    - { property: image, type: 'image' }
                     - description
                     - viewCount
                     - favoriteCount

@@ -129,6 +129,13 @@ class Room
         return $this->imageName;
     }
     /**
+     * @return null|string
+     */
+    public function getImage()
+    {
+        return $this->getImageName();
+    }
+    /**
      * @param string $imageName
      *
      * @return $this

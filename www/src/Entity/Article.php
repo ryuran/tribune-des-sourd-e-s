@@ -272,6 +272,13 @@ class Article
         return $this->videoUrl;
     }
     /**
+     * @return null|string
+     */
+    public function getVideo()
+    {
+        return $this->getVideoUrl();
+    }
+    /**
      * @param string $videoUrl
      *
      * @return $this
@@ -293,6 +300,13 @@ class Article
     public function getImageUrl()
     {
         return $this->imageUrl;
+    }
+    /**
+     * @return null|string
+     */
+    public function getImage()
+    {
+        return $this->getImageUrl();
     }
     /**
      * @param string $imageUrl
