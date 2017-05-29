@@ -19,9 +19,7 @@ class AdminArticleController extends BaseAdminController
      */
     public function prePersistEntity($article)
     {
-        if (!$article->getImageUrl()) {
-            $this->fillImageUrl($article);
-        }
+        $this->fillImageUrl($article);
 
         parent::prePersistEntity($article);
     }
@@ -31,9 +29,7 @@ class AdminArticleController extends BaseAdminController
      */
     public function preUpdateEntity($article)
     {
-        if (!$article->getImageUrl()) {
-            $this->fillImageUrl($article);
-        }
+        $this->fillImageUrl($article);
 
         parent::preUpdateEntity($article);
     }
@@ -43,6 +39,11 @@ class AdminArticleController extends BaseAdminController
      */
     private function fillImageUrl($article)
     {
-        $article->setImageUrl('http://i3.ytimg.com/vi/SomeVideoIDHere/0.jpg');
+        if ($article->getVideoUrl() && !$article->getImageUrl()) {
+            parse_str(parse_url($article->getVideoUrl(), PHP_URL_QUERY), $vars);
+            if (isset($vars['v'])) {
+                $article->setImageUrl('http://img.youtube.com/vi/' . $vars['v'] . '/mqdefault.jpg');
+            }
+        }
     }
 }

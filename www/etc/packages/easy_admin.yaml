@@ -93,6 +93,7 @@ easy_admin:
                 fields:
                     - title
                     - { property: videoUrl, type: 'url' }
+                    - { property: imageUrl, type: 'image' }
                     - viewCount
                     - favoriteCount
                     - { property: user, label: 'Author' }
@@ -123,7 +124,7 @@ easy_admin:
                     - categories
                     - tags
                     - { property: sourceUrl, type: 'url' }
-                    - { property: imageUrl, type: 'url' }
+                    - { property: imageUrl, type: 'image' }
                     - description
                     - viewCount
                     - favoriteCount
