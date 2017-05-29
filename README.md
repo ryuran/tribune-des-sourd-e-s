@@ -4,6 +4,8 @@ Plateforme de communication politique spécialisé pour les sourds
 
 ### STACK  
 
+See [Wiki](../../wiki) for more informations
+
 ###### BACK  
 **Serveur** : PHP 7.1+  
 **Base de donnée** : MySQL  
