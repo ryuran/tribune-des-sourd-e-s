@@ -1,5 +1,24 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    default_locale: fr
 
 services:
+    App\Service\Mailer:
+        arguments:
+            $mail_prefix: Tribunes Des Sourds Insoumis
+            $mail_website: localhost.dev
+            $mail_from: reply@localhost.dev
+            $mail_name: Admin
+
+    App\Service\Twig:
+        arguments:
+            $app_version: 0.0.1
+
+    App\Model\UserModel:
+        arguments:
+            $locale: '%default_locale%'
+
+    App\EventSubscriber\ResponseListener:
+        arguments:
+            $maintenance: true

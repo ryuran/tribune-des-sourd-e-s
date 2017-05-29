@@ -1,10 +1,10 @@
 <?php
-namespace App\Admin\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
-class AdminArticleController extends BaseAdminController
+class ArticleController extends BaseAdminController
 {
     public function createNewEntity()
     {

@@ -22,7 +22,7 @@ easy_admin:
             class: App\Entity\User
             label: 'Users'
             disabled_actions: ['delete']
-            controller: App\Admin\Controller\AdminUserController
+            controller: App\Controller\Admin\UserController
             list:
                 title: 'user.list.title'
                 fields:
@@ -87,7 +87,7 @@ easy_admin:
         Article:
             class: App\Entity\Article
             label: 'Articles'
-            controller: App\Admin\Controller\AdminArticleController
+            controller: App\Controller\Admin\ArticleController
             list:
                 title: 'article.list.title'
                 fields:
