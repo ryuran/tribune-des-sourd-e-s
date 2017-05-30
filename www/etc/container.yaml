@@ -1,8 +1,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
-    default_locale: fr
+    locale: 'fr'
 
     app_version: 0.0.1
     app_name: Tribunes Des Sourds Insoumis
@@ -40,7 +39,7 @@ services:
     App\Model\UserModel:
         autowire: true
         arguments:
-            $locale: '%default_locale%'
+            $locale: '%locale%'
 
     App\Security\UserAuthenticator:
         autowire: true

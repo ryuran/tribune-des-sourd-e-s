@@ -42,8 +42,8 @@ easy_admin:
                     - { type: 'divider' }
                     - { property: plainPassword, type: 'password', type_options: { required: true } }
                     - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
-                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true } }
-                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true } }
+                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
+                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
             edit:
                 title: 'user.edit.title'
                 fields:
@@ -51,8 +51,8 @@ easy_admin:
                     - { property: username }
                     - { property: email }
                     - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
-                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true } }
-                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true } }
+                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
+                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
             show:
                 title: 'user.show.title'
                 fields:
