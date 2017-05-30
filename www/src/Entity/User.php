@@ -436,8 +436,7 @@ class User implements UserInterface
 
     /**
      * @var string
-     * //@ORM\Column(type="string", length=10)
-     * //@Assert\NotBlank(groups={"Register"})
+     * @ORM\Column(type="string", length=10)
      */
     protected $locale;
     /**
@@ -460,7 +459,7 @@ class User implements UserInterface
 
     /**
      * @var string
-     * //@ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     protected $token;
     /**

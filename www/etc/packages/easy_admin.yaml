@@ -6,7 +6,7 @@ easy_admin:
         color_scheme: 'dark'
         form_theme: 'vertical'
         assets:
-            css: []
+            css: ['assets/admin.css']
             js: []
         menu:
             - { label: 'Back to website', route: 'index', icon: 'home' }
