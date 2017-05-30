@@ -1,0 +1,106 @@
+{% form_theme form current %}
+
+{% block attributes -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ translation_domain is same as(false) or (attr['translation_domain'] is defined and attr['translation_domain'] is same as(false)) ? attrvalue : attrvalue|trans({}, translation_domain) }}"
+        {%- elseif attrname in ['route_name'] -%}
+            {%- if attr['route_params'] is not defined or attr['route_params'] is empty -%}
+                {% set params = [] %}
+            {%- else -%}
+                {% set params = attr['route_params'] %}
+            {%- endif -%}
+            {{- 'href' }}="{{ path(attrvalue, params) }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {%- if attrname != 'icon' and attrname != 'route_params' -%}
+                {{- attrname }}="{{ attrvalue }}"
+            {%- endif -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock attributes -%}
+
+{%- block form_row -%}
+    <div class="form-group">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block button_row -%}
+    <div class="form-group buttons">
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock button_row -%}
+
+{%- block button_widget -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{% if attr['icon'] is defined %}<i class="{{ attr['icon'] }}"></i>{% endif %}{% if label is not same as(false) %}<span>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span>{% endif %}</button>
+{%- endblock button_widget -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="alert alert-danger">
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block choice_widget_expanded -%}
+    <div class="form-group" {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="choice">
+                {{- form_widget(child) -}}
+                {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{%- block preview_row -%}
+    <div {{ block('widget_container_attributes') }}>
+        {#{% if (value | fileExtension) in ['jpg', 'jpeg', 'png', 'svg', 'gif'] %}#}
+            {#<img src="{{ value }}"/>#}
+        {#{% else %}#}
+            {#<a class="btn btn-success" target="_blank" href="{{ value }}"><i class="fa fa-file"></i><span>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span></a>#}
+        {#{% endif %}#}
+    </div>
+{%- endblock preview_row -%}
+
+{%- block link_row -%}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <div class="form-group link">
+        <a {{ block('attributes') }}>{% if attr['icon'] is defined %}<i class="{{ attr['icon'] }}"></i>{% endif %}<span>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span></a>
+    </div>
+{%- endblock link_row -%}
+
+{%- block title_row -%}
+    <div {{ block('attributes') }}>{% if attr['icon'] is defined %}<i class="{{ attr['icon'] }}"></i>{% endif %}<span>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</span></div>
+{%- endblock title_row -%}
+
+{%- block label_row -%}
+    <div {{ block('attributes') }}>{% if attr['icon'] is defined %}<i class="{{ attr['icon'] }}"></i>{% endif %}<span>{{ translation_domain is same as(false) ? value : value|trans({}, translation_domain) }}</span></div>
+{%- endblock label_row -%}

@@ -30,7 +30,7 @@ class UserProvider implements UserProviderInterface
         $criteria->orWhere(new Comparison("email", Comparison::EQ, $username));
         $criteria->setMaxResults(1);
 
-        $user = $this->entityManager->getRepository("UserBundle:User")->matching($criteria)->first();
+        $user = $this->entityManager->getRepository("App:User")->matching($criteria)->first();
 
         if ($user) {
             return $user;

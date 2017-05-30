@@ -2,5 +2,9 @@ twig:
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    #exception_controller:  AppBundle:Page:exception
     form_themes:
         - 'Form/ckeditor_widget.html.twig'
+        - 'Form/fields.html.twig'
+    globals:
+        app_name: '%app_name%'

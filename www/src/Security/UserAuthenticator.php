@@ -29,6 +29,7 @@ class UserAuthenticator extends AbstractGuardAuthenticator
     private $params = [];
 
     public function __construct(
+        $user_login,
         EntityManager $entityManager,
         UserPasswordEncoder $userPasswordEncoder,
         Router $router
@@ -36,7 +37,7 @@ class UserAuthenticator extends AbstractGuardAuthenticator
         $this->entityManager = $entityManager;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->router = $router;
-        $this->params['user_login'] = 'easy_admin';
+        $this->params['user_login'] = $user_login;
     }
 
     /**
@@ -108,14 +109,14 @@ class UserAuthenticator extends AbstractGuardAuthenticator
             if (!$this->userPasswordEncoder->isPasswordValid($user, $credentials['plainPassword'])) {
                 throw new BadCredentialsException("Bad credentials.");
             } else {
-                switch ($user->getStatus()) {
-                    case User::DISABLED:
+                switch ($user->getState()) {
+                    case User::STATES['disabled']:
                         throw new DisabledException("Your account is disabled. Please contact the administrator.");
                         break;
-                    case User::WAIT_VALIDATION:
+                    case User::STATES['wait_validation']:
                         throw new LockedException("Your account is locked. Check and valid your email account.");
                         break;
-                    case User::ACTIVE:
+                    case User::STATES['active']:
                         return true;
                         break;
                 }

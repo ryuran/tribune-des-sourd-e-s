@@ -59,7 +59,7 @@ class ApiResponse implements \ArrayAccess
         return new ApiResponse(ApiResponse::CONTINUE);
     }
 
-    public static function checkValid(Form &$form, array $formData): ApiResponse
+    public static function checkValid(Form &$form, array $formData = null): ApiResponse
     {
         if (count($formData) === 0) {
             return ApiResponse::returnEmptyFormResponse($form);
@@ -73,7 +73,7 @@ class ApiResponse implements \ArrayAccess
         return new ApiResponse(ApiResponse::CONTINUE, ['form' => $form]);
     }
 
-    public static function checkConnectedAndValid(int $loggedUserId, Form &$form, array $formData): ApiResponse
+    public static function checkConnectedAndValid(int $loggedUserId, Form &$form, array $formData = null): ApiResponse
     {
         $apiResponseVerification = self::checkConnected($loggedUserId);
         if ($apiResponseVerification->code !== self::CONTINUE) {

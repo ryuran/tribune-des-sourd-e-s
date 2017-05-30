@@ -52,7 +52,7 @@ class Mailer
             $reply = $from;
         }
 
-        $mail = \Swift_Message::newInstance();
+        $mail = new \Swift_Message();
 
         $mail
             ->addPart($bodyHtml, 'text/html')

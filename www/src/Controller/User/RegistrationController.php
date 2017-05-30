@@ -16,11 +16,7 @@ class RegistrationController extends Controller
     {
         $viewData = [];
         /** @var array $formData */
-        $formData = $request->request->get(RegisterType::NAME) || [];
-
-        if (count($formData) > 0) {
-            $formData['locale'] = $request->getLocale();
-        }
+        $formData = $request->request->get(RegisterType::NAME);
 
         /** @var UserModel $userModel */
         $userModel = $this->get(UserModel::class);

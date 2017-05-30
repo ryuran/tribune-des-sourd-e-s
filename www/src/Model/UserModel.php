@@ -59,7 +59,7 @@ class UserModel extends CoreModel
     public function find(string $username): User
     {
         /** @var UserRepository $userRepository */
-        $userRepository = $this->entityManager->getRepository('UserBundle:User');
+        $userRepository = $this->entityManager->getRepository('App:User');
         return $userRepository->getByUsernameOrEmail($username);
     }
 
@@ -105,7 +105,7 @@ class UserModel extends CoreModel
         return $user;
     }
 
-    public function register(array $formData, bool $skipValidation = false): ApiResponse
+    public function register(array $formData = null, bool $skipValidation = false): ApiResponse
     {
         $user = new User();
         $form = $this->formFactory->create(RegisterType::class, $user);
@@ -122,7 +122,7 @@ class UserModel extends CoreModel
         }
 
         $this->entityManager->persist($user);
-        //$this->entityManager->flush();
+        $this->entityManager->flush();
 
         if (!$skipValidation) {
             $this->mailer->sendToUser(
@@ -165,7 +165,7 @@ class UserModel extends CoreModel
     public function validate($token): ApiResponse
     {
         /** @var User $user */
-        $user = $this->entityManager->getRepository('UserBundle:User')->findOneBy(['token' => $token]);
+        $user = $this->entityManager->getRepository('App:User')->findOneBy(['token' => $token]);
 
         if (!$user instanceof User) {
             return ApiResponse::returnErrorsResponse([
@@ -228,7 +228,7 @@ class UserModel extends CoreModel
 
         if ($username !== null) {
             /** @var User $user */
-            $user = $this->entityManager->getRepository('UserBundle:User')->findOneBy(['username' => $username]);
+            $user = $this->entityManager->getRepository('App:User')->findOneBy(['username' => $username]);
 
             if ($user) {
                 return ApiResponse::returnValidEntityResponse($user);
@@ -330,7 +330,7 @@ class UserModel extends CoreModel
         $token = $formData['_user_token'];
         unset($formData['_user_token']);
 
-        $user = $this->entityManager->getRepository('UserBundle:User')->findOneBy(['token' => $token]);
+        $user = $this->entityManager->getRepository('App:User')->findOneBy(['token' => $token]);
 
         if (!$user) {
             return ApiResponse::returnErrorsResponse(['#' => ['Link not valid.']]);
@@ -359,7 +359,7 @@ class UserModel extends CoreModel
             return ApiResponse::returnEmptyResponse();
         }
 
-        $userRepository = $this->entityManager->getRepository('UserBundle:User');
+        $userRepository = $this->entityManager->getRepository('App:User');
 
         $userByEmail = $userRepository->findOneBy(['email' => $formData['email']]);
         $userById = $userRepository->findOneBy([$service . 'Id' => $formData['id']]);

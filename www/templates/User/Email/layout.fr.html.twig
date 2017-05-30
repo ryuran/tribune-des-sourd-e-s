@@ -1,0 +1,17 @@
+{% extends 'User/Email/block.html.twig' %}
+
+{% block subject %}[LTSI] {% block subject_child %}{% endblock %}{% endblock %}
+
+{% block body_html %}
+    {% block body_html_child %}{% endblock %}
+    <br/><br/>
+    --------------------------------------------------------------------------<br/>
+    L'équipe de la tribune des sourds insoumis | {{ app_domain }}
+{% endblock %}
+
+{% block body_text %}
+    {% block body_text_child %}{% endblock %}
+    \n\n
+    --------------------------------------------------------------------------\n
+    L'équipe de la tribune des sourds insoumis | {{ app_domain }}
+{% endblock %}

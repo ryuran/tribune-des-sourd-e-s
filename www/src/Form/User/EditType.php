@@ -33,10 +33,6 @@ class EditType extends AbstractType
             $tokenStorage->getToken()->getUser() : null;
 
         $builder
-            ->add('header', TitleType::class, [
-                'label' => 'Settings',
-                'attr' => ['class' => 'h3 text-center']
-            ])
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control',
                     'placeholder' => $this->user !== null ? $this->user->getEmail() : '',
@@ -69,19 +65,6 @@ class EditType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Update',
                 'attr' => ['class' => 'btn btn-success btn-block', 'icon' => 'fa fa-check']
-            ])
-            ->add('unsubscribeLabel', TitleType::class, [
-                'label' => 'Careful! After clicking on "To unsubscribe", '.
-                    'all your data will be deleted and can not be recovered',
-                'attr' => ['class' => 'alert text-danger', 'icon' => 'fa fa-exclamation-triangle']
-            ])
-            ->add('unsubscribeLink', LinkType::class, [
-                'label' => 'To unsubscribe',
-                'attr' => [
-                    'class' => 'btn btn-link text-danger',
-                    'route_name' => 'user_unsubscribe',
-                    'icon' => 'fa fa-exclamation-triangle'
-                ]
             ]);
     }
 

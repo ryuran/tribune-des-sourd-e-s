@@ -49,7 +49,7 @@ class ResponseListener implements EventSubscriberInterface
                 }
 
                 if ($user && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-                    if ($user->getStatus() === User::DISABLED) {
+                    if ($user->getState() === User::STATES['disabled']) {
                         $request->getSession()->invalidate();
                         $this->tokenStorage->setToken(null);
                     }

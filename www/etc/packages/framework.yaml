@@ -5,11 +5,17 @@ framework:
     #http_method_override: true
     #trusted_hosts: null
     # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-    #session:
-    #    handler_id: session.handler.native_file
-    #    save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
-    #esi: ~
-    #fragments: ~
+    session:
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    esi: ~
+    fragments: ~
+    assets:
+        version: '%app_version%'
+        version_format: '%%s?version=%%s'
+    validation:
+        enabled: true
+        enable_annotations: true
     form:
         enabled: true
     php_errors:

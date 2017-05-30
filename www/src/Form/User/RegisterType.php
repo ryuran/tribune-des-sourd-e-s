@@ -27,10 +27,6 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('header', TitleType::class, [
-                'label' => 'Register',
-                'attr' => ['class' => 'h3 text-center']
-            ])
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control'],
                 'validation_groups' => ['Register'],
@@ -43,18 +39,6 @@ class RegisterType extends AbstractType
                 'attr' => ['class' => 'form-control', 'autocomplete' => 'off'],
                 'validation_groups' => ['Register'],
             ])
-            ->add('locale', HiddenType::class, [
-                'validation_groups' => ['Register']
-            ])
-            ->add('link', LinkType::class, [
-                'label' => 'Connection',
-                'attr' => [
-                    'class' => 'btn btn-link pull-left',
-                    'route_name' => 'user_login',
-                    'icon' => 'fa fa-arrow-right'
-                ]
-            ])
-            ->add('secret', SpamType::class)
             ->add('save', SubmitType::class, [
                 'label' => 'Register',
                 'attr' => ['class' => 'btn btn-success pull-right', 'icon' => 'fa fa-check']

@@ -3,19 +3,33 @@
 parameters:
     default_locale: fr
 
+    app_version: 0.0.1
+    app_name: Tribunes Des Sourds Insoumis
+    app_domain: localhost.dev
+
+    user_register:    user_login
+    user_login:       index
+    user_logout:      index
+    user_forget:      user_login
+    user_reset:       index
+    user_update:      index
+    user_unsubscribe: index
+
 services:
     App\Service\Mailer:
         autowire: true
         arguments:
             $mail_prefix: Tribunes Des Sourds Insoumis
-            $mail_website: localhost.dev
-            $mail_from: reply@localhost.dev
+            $mail_website: '%app_domain%'
+            $mail_from: 'reply@%app_domain%'
             $mail_name: Admin
 
     App\Service\Twig:
         autowire: true
+        tags: [twig.extension]
+        public: false
         arguments:
-            $app_version: 0.0.1
+            $app_version: '%app_version%'
 
     App\EventSubscriber\ResponseListener:
         autowire: true
@@ -29,6 +43,8 @@ services:
 
     App\Security\UserAuthenticator:
         autowire: true
+        arguments:
+            $user_login: '%user_login%'
 
     App\Security\UserProvider:
         autowire: true

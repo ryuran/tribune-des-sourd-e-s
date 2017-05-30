@@ -23,22 +23,10 @@ class ForgetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('header', TitleType::class, [
-                'label' => 'Forgot password',
-                'attr' => ['class' => 'h3 text-center']
-            ])
             ->add('username', TextType::class, [
                 'label' => 'Username or email',
                 'attr' => ['class' => 'form-control'],
                 'validation_groups' => array('Forget'),
-            ])
-            ->add('link', LinkType::class, [
-                'label' => 'Connection',
-                'attr' => [
-                    'class' => 'btn btn-link pull-left',
-                    'route_name' => 'user_login',
-                    'icon' => 'fa fa-arrow-right'
-                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Send',

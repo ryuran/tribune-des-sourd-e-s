@@ -23,10 +23,6 @@ class RenewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('header', TitleType::class, [
-                'label' => 'Reset password',
-                'attr' => ['class' => 'h3 text-center']
-            ])
             ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
                     'required' => true,

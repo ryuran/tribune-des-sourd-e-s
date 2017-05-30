@@ -5,6 +5,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -41,6 +42,7 @@ class User implements UserInterface
         $this->roles = [self::ROLES['user']];
         $this->state = self::STATES['disabled'];
         $this->enabledEmails = [];
+        $this->locale = 'fr';
         $this->initToken();
         $this->articles = new ArrayCollection();
         $this->favorites = new ArrayCollection();
@@ -233,6 +235,13 @@ class User implements UserInterface
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(groups={"Login", "Register", "Forget"})
+     * @Assert\Regex(
+     *     pattern= "/^[a-z0-9-_]{3,16}$/i",
+     *     htmlPattern= "^[a-zA-Z0-9-_]+$",
+     *     message= "Only 3-16 alphanumeric characters.",
+     *     groups={"Register", "Edit"}
+     * )
      */
     protected $username;
     /**
@@ -257,6 +266,12 @@ class User implements UserInterface
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(groups={"Register"})
+     * @Assert\Email(
+     *     message= "The email is not a valid email.",
+     *     checkMX= true,
+     *     groups={"Register", "Edit"}
+     * )
      */
     protected $email;
     /**
@@ -307,6 +322,7 @@ class User implements UserInterface
     protected $password;
     /**
      * @var null|string
+     * @Assert\NotBlank(groups={"Login", "Register", "Reset"})
      */
     protected $plainPassword;
     /**
@@ -420,7 +436,8 @@ class User implements UserInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=10)
+     * //@ORM\Column(type="string", length=10)
+     * //@Assert\NotBlank(groups={"Register"})
      */
     protected $locale;
     /**
@@ -443,7 +460,7 @@ class User implements UserInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * //@ORM\Column(type="string", length=255)
      */
     protected $token;
     /**

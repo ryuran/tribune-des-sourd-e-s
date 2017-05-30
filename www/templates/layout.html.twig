@@ -1,3 +1,37 @@
-Hello world
+{% extends 'body.html.twig' %}
 
-{% block page %}{% endblock %}
+{%- block title -%}
+    {% block title_page %}{% endblock %} | {{ app_name }}
+{%- endblock -%}
+
+{%- block description -%}
+    {%- block description_page -%}
+
+    {%- endblock -%}
+{%- endblock -%}
+
+{% block head %}
+    <link rel="stylesheet" media="all" href="{{ app.request.getSchemeAndHttpHost() ~ asset('/assets/app/style.css') }}">
+    {% block head_page %}{% endblock %}
+{% endblock %}
+
+{% block foot %}
+    {% block foot_page %}{% endblock %}
+{% endblock %}
+
+{% block image %}{{ app.request.getSchemeAndHttpHost() ~ asset('/favicon.ico') }}{% endblock %}
+
+{%- block body -%}
+    {% if is_granted('ROLE_ADMIN') %}
+
+    {% endif %}
+    <div class="container-fluid" role="main">
+        {% for type, messages in app.session.flashbag.all %}
+            {% set type = type == 'error' ? 'danger' : type %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}">{{ message | trans }}</div>
+            {% endfor %}
+        {% endfor %}
+        {% block page %}{% endblock %}
+    </div>
+{%- endblock -%}
