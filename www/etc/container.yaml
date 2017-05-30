@@ -5,6 +5,7 @@ parameters:
 
 services:
     App\Service\Mailer:
+        autowire: true
         arguments:
             $mail_prefix: Tribunes Des Sourds Insoumis
             $mail_website: localhost.dev
@@ -12,13 +13,22 @@ services:
             $mail_name: Admin
 
     App\Service\Twig:
+        autowire: true
         arguments:
             $app_version: 0.0.1
 
+    App\EventSubscriber\ResponseListener:
+        autowire: true
+        arguments:
+            $maintenance: 1
+
     App\Model\UserModel:
+        autowire: true
         arguments:
             $locale: '%default_locale%'
 
-    App\EventSubscriber\ResponseListener:
-        arguments:
-            $maintenance: true
+    App\Security\UserAuthenticator:
+        autowire: true
+
+    App\Security\UserProvider:
+        autowire: true

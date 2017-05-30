@@ -20,7 +20,7 @@ class LoggedController extends Controller
         /** @var User $userLogged */
         $userLogged = clone $this->getUser();
         /** @var UserModel $userModel */
-        $userModel = $this->get('user.model.user');
+        $userModel = $this->get(UserModel::class);
         $formData = $request->request->get(EditType::NAME) ?? [];
 
         /** @var ApiResponse $apiResponse */
@@ -48,7 +48,7 @@ class LoggedController extends Controller
             $viewData['form'] = $form->createView();
         }
 
-        return $this->render('UserBundle:Logged:edit.html.twig', $viewData);
+        return $this->render('User/Logged/edit.html.twig', $viewData);
     }
 
     public function resetAction(Request $request, $user_token)
@@ -58,7 +58,7 @@ class LoggedController extends Controller
         $formData['_user_token'] = $user_token;
 
         /** @var UserModel $userModel */
-        $userModel = $this->get('user.model.user');
+        $userModel = $this->get(UserModel::class);
         /** @var ApiResponse $apiResponse */
         $apiResponse = $userModel->reset($formData);
 
@@ -71,7 +71,7 @@ class LoggedController extends Controller
                 $viewData['form'] = $form->createView();
             }
 
-            return $this->render('UserBundle:Logged:reset.html.twig', $viewData);
+            return $this->render('User/Logged/reset.html.twig', $viewData);
         } else {
             throw $this->createNotFoundException();
         }
@@ -80,7 +80,7 @@ class LoggedController extends Controller
     public function unsubscribeAction()
     {
         /** @var UserModel $userModel */
-        $userModel = $this->get('user.model.user');
+        $userModel = $this->get(UserModel::class);
         $userModel->unsubscribe();
         /** @var Session $session */
         $session = $this->get('session');
@@ -95,7 +95,7 @@ class LoggedController extends Controller
     public function logoutAction()
     {
         /** @var UserModel $userModel */
-        $userModel = $this->get('user.model.user');
+        $userModel = $this->get(UserModel::class);
         $userModel->forceLogout();
         $this->get('session')->invalidate();
 

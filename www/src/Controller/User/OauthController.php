@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Utils\ApiResponse;
+use App\Model\UserModel;
 
 class OauthController extends Controller
 {
@@ -55,10 +56,10 @@ class OauthController extends Controller
                 $userData = $apiResponse->embedded['user'];
 
                 if (isset($userData['id']) && isset($userData['email'])) {
-                    $responseDataUser = $this->get('user.model.user')->oauth($service, $userData);
+                    $responseDataUser = $this->get(UserModel::class)->oauth($service, $userData);
 
                     if ($responseDataUser['valid']) {
-                        //return $this->render('UserBundle:Oauth:popup.html.twig', ['errors' => []]);
+                        //return $this->render('User/Oauth/popup.html.twig', ['errors' => []]);
                         return $this->redirectToRoute($this->getParameter('user_login'));
                     } else {
                         $errors = $responseDataUser['errors'];
@@ -77,7 +78,7 @@ class OauthController extends Controller
             $errors = ['#' => ['Connection was canceled.']];
         }
 
-        //return $this->render('UserBundle:Oauth:popup.html.twig', ['errors' => $errors]);
+        //return $this->render('User/Oauth/popup.html.twig', ['errors' => $errors]);
         return $this->redirectWithErrors($request, $errors);
     }
 }

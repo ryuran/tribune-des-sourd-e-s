@@ -41,6 +41,7 @@ class User implements UserInterface
         $this->roles = [self::ROLES['user']];
         $this->state = self::STATES['disabled'];
         $this->enabledEmails = [];
+        $this->initToken();
         $this->articles = new ArrayCollection();
         $this->favorites = new ArrayCollection();
         $this->messagesFrom = new ArrayCollection();
@@ -415,6 +416,56 @@ class User implements UserInterface
     {
         $this->enabledEmails = $enabledEmails;
         return $this;
+    }
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=10)
+     */
+    protected $locale;
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+        return $this;
+    }
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $token;
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->locale;
+    }
+    /**
+     * @param string $token
+     *
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+        return $this;
+    }
+    public function initToken()
+    {
+        $this->setToken(base_convert(sha1('token' . uniqid(mt_rand(), true)), 16, 36));
     }
 
     /**

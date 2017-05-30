@@ -1,0 +1,17 @@
+{% extends 'AppBundle:Email:base.html.twig' %}
+
+{% block subject_child 'Bienvenue ' ~ user.getUsername() %}
+
+{% block body_html_child %}
+  Bienvenue,<br/>
+  <br/>
+  Pour valider votre compte, cliquez sur ce lien :<br/>
+  {{ url('user_validate', {'user_token' : token}) }}
+{% endblock %}
+
+{% block body_text_child %}
+  Bienvenue,\n
+  \n
+  Pour valider votre compte, cliquez sur ce lien : \n
+  {{ url('user_validate', {'user_token' : token}) }}
+{% endblock %}

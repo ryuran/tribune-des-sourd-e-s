@@ -12,8 +12,8 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use App\Abstracts\CoreModel;
 use App\Utils\ApiResponse;
-use App\Security\Authenticator;
-use App\Security\Provider;
+use App\Security\UserAuthenticator;
+use App\Security\UserProvider;
 use App\Helper\UserHelper;
 use App\Repository\UserRepository;
 use App\Service\Mailer;
@@ -43,8 +43,8 @@ class UserModel extends CoreModel
         UserPasswordEncoder $userPasswordEncoder,
         Mailer $mailer,
         FormFactory $formFactory,
-        Authenticator $authenticator,
-        Provider $provider
+        UserAuthenticator $authenticator,
+        UserProvider $provider
     ) {
         parent::__construct($entityManager, $tokenStorage, $authorizationChecker, $translator);
         $this->userPasswordEncoder = $userPasswordEncoder;
@@ -87,7 +87,7 @@ class UserModel extends CoreModel
             $password = UserHelper::randomPassword();
         }
         if (!$role) {
-            $role = "ROLE_USER";
+            $role = User::ROLES['user'];
         }
 
         $user = new User();
@@ -95,8 +95,8 @@ class UserModel extends CoreModel
         $user->setUsername($username);
         $user->setPlainPassword($password);
         $user->setPassword($this->userPasswordEncoder->encodePassword($user, $user->getPlainPassword()));
-        $user->setLocale($this->params['locale']);
-        $user->setStatus(User::ACTIVE);
+        //$user->setLocale($this->params['locale']);
+        $user->setState(User::STATES['active']);
         $user->setRoles([$role]);
 
         $this->entityManager->persist($user);
@@ -122,11 +122,11 @@ class UserModel extends CoreModel
         }
 
         $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        //$this->entityManager->flush();
 
         if (!$skipValidation) {
             $this->mailer->sendToUser(
-                'UserBundle:Email:register.' . $user->getLocale() . '.html.twig',
+                'User\Email\register.' . $user->getLocale() . '.html.twig',
                 $user,
                 ['token' => $user->getToken()]
             );
@@ -209,7 +209,7 @@ class UserModel extends CoreModel
             $this->entityManager->flush();
 
             $this->mailer->sendToUser(
-                'UserBundle:Email:forget.' . $user->getLocale() . '.html.twig',
+                'User\Email\forget.' . $user->getLocale() . '.html.twig',
                 $user,
                 ['token' => $user->getToken()]
             );
@@ -297,7 +297,7 @@ class UserModel extends CoreModel
             $loggedUser->initToken();
 
             $this->mailer->sendToUser(
-                'UserBundle:Email:update.' . $loggedUser->getLocale() . '.html.twig',
+                'User\Email\update.' . $loggedUser->getLocale() . '.html.twig',
                 $loggedUser,
                 ['token' => $loggedUser->getToken()]
             );

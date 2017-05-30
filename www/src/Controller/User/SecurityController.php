@@ -9,7 +9,7 @@ use App\Utils\ApiResponse;
 use App\Form\User\LoginType;
 use App\Entity\User;
 use App\Form\User\ForgetType;
-use UserBundle\Model\UserModel;
+use App\Model\UserModel;
 
 class SecurityController extends Controller
 {
@@ -26,7 +26,7 @@ class SecurityController extends Controller
         $userForm = $this->get('form.factory')->create(LoginType::class, $user);
         $viewData['form'] = $userForm->createView();
 
-        return $this->render('UserBundle:Security:login.html.twig', $viewData);
+        return $this->render('User/Security/login.html.twig', $viewData);
     }
 
     public function forgetAction(Request $request)
@@ -35,7 +35,7 @@ class SecurityController extends Controller
         $formData = $request->request->get(ForgetType::NAME) ?? [];
 
         /** @var UserModel $userModel */
-        $userModel = $this->get('user.model.user');
+        $userModel = $this->get(UserModel::class);
         /** @var ApiResponse $responseData */
         $apiResponse = $userModel->forget($formData);
 
@@ -48,6 +48,6 @@ class SecurityController extends Controller
             $viewData['form'] = $form->createView();
         }
 
-        return $this->render('UserBundle:Security:forget.html.twig', $viewData);
+        return $this->render('User/Security/forget.html.twig', $viewData);
     }
 }

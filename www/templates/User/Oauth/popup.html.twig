@@ -1,0 +1,39 @@
+{% if (errors | length) > 0 %}
+  {% for errors_field in errors %}
+    <div class="alert alert-danger">
+      {% for error in errors_field %}
+        <div>{{ error | trans }}</div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="alert alert-success">
+    {{ 'Connection is successful.' | trans }}<br/>
+    {{ 'Currrent tab will close in a few seconds.' | trans }}
+  </div>
+{% endif %}
+
+<style>
+  .alert{
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+  }
+  .alert-danger{
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #fff;
+  }
+  .alert-success{
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #fff;
+  }
+</style>
+
+<script>
+  var howLong = 5000,
+    t = setTimeout("self.close()",howLong);
+</script>

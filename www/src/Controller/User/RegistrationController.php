@@ -8,21 +8,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Form\Form;
 use App\Form\User\RegisterType;
-use UserBundle\Model\UserModel;
+use App\Model\UserModel;
 
 class RegistrationController extends Controller
 {
     public function registerAction(Request $request)
     {
         $viewData = [];
-        $formData = $request->request->get(RegisterType::NAME);
+        /** @var array $formData */
+        $formData = $request->request->get(RegisterType::NAME) || [];
 
         if (count($formData) > 0) {
             $formData['locale'] = $request->getLocale();
         }
 
-        /** @var UserModel $modelUser */
-        $userModel = $this->get('user.model.user');
+        /** @var UserModel $userModel */
+        $userModel = $this->get(UserModel::class);
         /** @var ApiResponse $apiResponse */
         $apiResponse = $userModel->register($formData);
 
@@ -38,13 +39,13 @@ class RegistrationController extends Controller
             $viewData['form'] = $form->createView();
         }
 
-        return $this->render('UserBundle:Registration:register.html.twig', $viewData);
+        return $this->render('User/Registration/register.html.twig', $viewData);
     }
 
     public function validateAction($user_token)
     {
         /** @var UserModel $userModel */
-        $userModel = $this->get('user.model.user');
+        $userModel = $this->get(UserModel::class);
         $responseData = $userModel->validate($user_token);
 
         if ($responseData->code === ApiResponse::SUCCESS) {

@@ -1,0 +1,17 @@
+{% extends 'AppBundle:Email:base.html.twig' %}
+
+{% block subject_child 'Changement d\'email' %}
+
+{% block body_html_child %}
+  Bonjour,<br/>
+  <br/>
+  Pour valider à nouveau ton compte clique sur ce lien :<br/>
+  {{ url('user_validate', {'user_token' : token}) }}
+{% endblock %}
+
+{% block body_text_child %}
+  Bonjour,\n
+  \n
+  Pour valider à nouveau ton compte clique sur ce lien : \n
+  {{ url('user_validate', {'user_token' : token}) }}
+{% endblock %}
