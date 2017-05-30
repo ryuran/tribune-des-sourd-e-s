@@ -1,0 +1,9 @@
+###> symfony/framework-bundle ###
+.env
+/var/
+/vendor/
+/web/bundles/
+###< symfony/framework-bundle ###
+###> symfony/web-server-bundle ###
+.web-server-pid
+###< symfony/web-server-bundle ###

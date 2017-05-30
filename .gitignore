@@ -7,6 +7,9 @@
 ###> symfony/web-server-bundle ###
 /www/.web-server-pid
 ###< symfony/web-server-bundle ###
+###> composer ###
+/www/composer.lock
+###< composer ###
 ###> docker ###
 docker/var
 ###< docker ###

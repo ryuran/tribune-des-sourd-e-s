@@ -21,7 +21,7 @@ easy_admin:
         User:
             class: App\Entity\User
             label: 'Users'
-            #disabled_actions: ['delete']
+            disabled_actions: ['delete']
             controller: App\Controller\Admin\UserController
             list:
                 title: 'user.list.title'
