@@ -8,7 +8,7 @@ See [Wiki](../../wiki) for more informations
 
 ###### BACK  
 **Serveur** : PHP 7.1+  
-**Base de donnée** : MySQL  
+**Base de donnée** : MySQL 5.7+ 
 **Framework** : Flex / Symfony 3.3+
 
 ###### FRONT  
@@ -27,6 +27,7 @@ See [Wiki](../../wiki) for more informations
 ###### WITHOUT DOCKER
 
 - check php version >= 7.1
+- check mysql version >= 5.7
 - `cp .env.dist .env`
 - install composer
 - `composer install`
