@@ -1,4 +1,5 @@
 '#': '#'
+__name__label__: ''
 active: Actif
 action.cancel: Annuler
 action.delete: Supprimer
@@ -16,8 +17,6 @@ article.new.title: 'Ajouter un reportage'
 article.edit.title: 'Modifier un reportage'
 article.show.title: Reportage
 article.form.text.title: 'Textes'
-article.form.link.title: 'Liens'
-article.form.categories.title: 'Titre, Catégories et Tags'
 Author: Auteur
 'Back to website': 'Retourner au site web'
 Category: Catégorie
@@ -30,6 +29,7 @@ category.show.title: Catégorie
 Description: Description
 disabled: Désactivé
 Email: Email
+Existing tags: Tags existants
 Favorite: Favori
 Favorites: Favoris
 'Favorite count': 'Nb. favoris'
@@ -38,9 +38,11 @@ ID: ID
 'Image name': 'Nom de l''image'
 Image: Image
 Link: Lien
+Links: Liens
 Message: Message
 Messages: Messages
 Name: Nom
+New tags: Nouveaux tags
 'Plain password': 'Mot de passe'
 Report: Reportage
 Reports: Reportages

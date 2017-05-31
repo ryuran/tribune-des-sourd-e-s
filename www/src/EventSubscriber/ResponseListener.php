@@ -44,7 +44,7 @@ class ResponseListener implements EventSubscriberInterface
 
             if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
                 if ($this->params['maintenance']) {
-                    echo $this->twig->loadTemplate('AppBundle:Exception:maintenance.html.twig')->render([]);
+                    echo $this->twig->loadTemplate('Exception:maintenance.html.twig')->render([]);
                     exit;
                 }
 

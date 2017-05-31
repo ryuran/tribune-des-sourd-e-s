@@ -82,7 +82,7 @@ class UserAuthenticator extends AbstractGuardAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         if (isset($credentials['token'])) {
-            return $this->entityManager->getRepository('AppBundle:User')
+            return $this->entityManager->getRepository('App:User')
                 ->findOneBy(array('apiToken' => $credentials['token']));
         } elseif (isset($credentials['username']) && isset($credentials['plainPassword'])) {
             return $userProvider->loadUserByUsername($credentials['username']);

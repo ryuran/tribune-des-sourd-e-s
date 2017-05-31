@@ -1,3 +1,7 @@
 .main-header .logo{
     width: auto;
 }
+
+#article_newTags > .form-group > label{
+    display: none;
+}

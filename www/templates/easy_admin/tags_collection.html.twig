@@ -1,5 +1,5 @@
 {% set colors = field_options.label_colors|default(['primary']) %}
 
 {% for tag in value %}
-    <span class="label label-{{ cycle(colors, loop.index) }}">{{ tag }}</span>
+    <a class="label label-{{ cycle(colors, loop.index) }}" href="{{ path('easyadmin', link_parameters|merge({ id: tag.id })) }}">{{ tag | easyadmin_truncate }}</a>
 {% endfor %}

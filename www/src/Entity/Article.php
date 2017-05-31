@@ -16,6 +16,7 @@ class Article
         $this->favorites = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->newTags = [];
         $this->viewCount = 0;
         $this->favoriteCount = 0;
     }
@@ -118,6 +119,7 @@ class Article
     }
 
     /**
+     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articles")
      * @ORM\JoinTable(name="articles_categories",
      *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
@@ -154,6 +156,7 @@ class Article
     }
 
     /**
+     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles")
      * @ORM\JoinTable(name="articles_tags",
      *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
@@ -186,6 +189,17 @@ class Article
     public function removeTag(Tag $tag)
     {
         $this->tags->removeElement($tag);
+        return $this;
+    }
+    /** @var array */
+    private $newTags;
+    public function getNewTags()
+    {
+        return $this->newTags;
+    }
+    public function setNewTags($newTags)
+    {
+        $this->newTags = $newTags;
         return $this;
     }
 
@@ -272,13 +286,6 @@ class Article
         return $this->videoUrl;
     }
     /**
-     * @return null|string
-     */
-    public function getVideo()
-    {
-        return $this->getVideoUrl();
-    }
-    /**
      * @param string $videoUrl
      *
      * @return $this
@@ -300,13 +307,6 @@ class Article
     public function getImageUrl()
     {
         return $this->imageUrl;
-    }
-    /**
-     * @return null|string
-     */
-    public function getImage()
-    {
-        return $this->getImageUrl();
     }
     /**
      * @param string $imageUrl

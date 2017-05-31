@@ -26,8 +26,8 @@ easy_admin:
                 title: 'article.list.title'
                 fields:
                     - title
-                    - { property: video, template: 'easy_admin/short_url' }
-                    - { property: image, type: 'image' }
+                    - { property: videoUrl, template: 'easy_admin/short_url', label: 'Image' }
+                    - { property: imageUrl, type: 'image', label: 'Image' }
                     - { property: categories, template: 'easy_admin/tags_collection' }
                     - viewCount
                     - favoriteCount
@@ -39,16 +39,17 @@ easy_admin:
                 sort: ['title', 'ASC']
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'article.form.categories.title', icon: 'tags' }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'article.form.text.title', icon: 'file-text' }
                     - title
                     - categories
-                    - tags
-                    - { type: 'group', css_class: 'col-sm-6', label: 'article.form.link.title', icon: 'link' }
+                    - { property: description, type: 'ckeditor', type_options: { required: false } }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Links', icon: 'link' }
                     - { property: videoUrl, type: 'url' }
                     - { property: sourceUrl, type: 'url', type_options: { required: false } }
                     - { property: imageUrl, type: 'url', type_options: { required: false } }
-                    - { type: 'group', css_class: 'col-sm-12', label: 'article.form.text.title', icon: 'file-text' }
-                    - { property: description, type: 'ckeditor', type_options: { required: false } }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Tags', icon: 'tags' }
+                    - { property: tags, label: 'Existing tags'}
+                    - { property: newTags, type: 'collection' }
             new:
                 title: 'article.new.title'
             edit:
@@ -59,10 +60,10 @@ easy_admin:
                     - id
                     - { property: videoUrl, type: 'url' }
                     - title
-                    - categories
-                    - tags
+                    - { property: categories, template: 'easy_admin/tags_collection' }
+                    - { property: tags, template: 'easy_admin/tags_collection' }
                     - { property: sourceUrl, type: 'url' }
-                    - { property: image, type: 'image' }
+                    - { property: imageUrl, type: 'image', label: 'Image' }
                     - description
                     - viewCount
                     - favoriteCount
@@ -75,7 +76,7 @@ easy_admin:
             list:
                 fields:
                     - name
-                    - imageName
+                    - { property: imageName, label: 'Image' }
                     - articles
                 title: 'category.list.title'
                 sort: ['name', 'ASC']
@@ -93,7 +94,7 @@ easy_admin:
                 fields:
                     - id
                     - name
-                    - imageName
+                    - { property: imageName, label: 'Image' }
                     - articles
 
         Tag:
@@ -172,7 +173,7 @@ easy_admin:
             list:
                 fields:
                     - name
-                    - imageName
+                    - { property: imageName, label: 'Image' }
                     - messages
 
                 title: 'room.list.title'
@@ -191,4 +192,4 @@ easy_admin:
                 fields:
                     - id
                     - name
-                    - imageName
+                    - { property: imageName, label: 'Image' }
