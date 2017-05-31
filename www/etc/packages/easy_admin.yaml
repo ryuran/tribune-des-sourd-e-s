@@ -10,80 +10,14 @@ easy_admin:
             js: []
         menu:
             - { label: 'Back to website', route: 'index', icon: 'home' }
-            - { label: 'Users' }
-            - { entity: 'User', label: 'Users', icon: 'user' }
-            - { entity: 'Room', label: 'Rooms', icon: 'comments' }
             - { label: 'Articles' }
             - { entity: 'Article', label: 'Reports', icon: 'youtube-play' }
             - { entity: 'Category', label: 'Categories', icon: 'folder' }
             - { entity: 'Tag', label: 'Tags', icon: 'tags' }
+            - { label: 'Users' }
+            - { entity: 'User', label: 'Users', icon: 'user' }
+            - { entity: 'Room', label: 'Rooms', icon: 'comments' }
     entities:
-        User:
-            class: App\Entity\User
-            label: 'Users'
-            disabled_actions: ['delete']
-            controller: App\Controller\Admin\UserController
-            list:
-                title: 'user.list.title'
-                fields:
-                    - username
-                    - email
-                    - { property: stateName, template: 'easy_admin/translated' }
-                    - { property: roleName, template: 'easy_admin/translated' }
-                    - { property: updatedAt, format: 'd/m/Y' }
-                sort: ['updatedAt', 'DESC']
-                actions: ['show', 'edit', 'new', 'search']
-            new:
-                title: 'user.new.title'
-                fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
-                    - { property: username }
-                    - { property: email }
-                    - { type: 'divider' }
-                    - { property: plainPassword, type: 'password', type_options: { required: true } }
-                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
-                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
-                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
-            edit:
-                title: 'user.edit.title'
-                fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
-                    - { property: username }
-                    - { property: email }
-                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
-                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
-                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
-            show:
-                title: 'user.show.title'
-                fields:
-                    - id
-                    - username
-                    - email
-                    - { property: stateName, template: 'easy_admin/translated' }
-                    - { property: roleName, template: 'easy_admin/translated' }
-                    - { property: 'createdAt', format: 'd/m/Y' }
-                    - { property: 'updatedAt', format: 'd/m/Y' }
-        Room:
-            class: App\Entity\Room
-            label: 'Rooms'
-            list:
-                title: 'room.list.title'
-                sort: ['name', 'ASC']
-                actions: ['show', 'edit', 'new', 'search']
-            form:
-                fields:
-                    - name
-                    - imageName
-            new:
-                title: 'room.new.title'
-            edit:
-                title: 'room.new.title'
-            show:
-                title: 'room.show.title'
-                fields:
-                    - id
-                    - name
-                    - imageName
         Article:
             class: App\Entity\Article
             label: 'Articles'
@@ -182,3 +116,74 @@ easy_admin:
                     - id
                     - name
                     - articles
+        User:
+            class: App\Entity\User
+            label: 'Users'
+            disabled_actions: ['delete']
+            controller: App\Controller\Admin\UserController
+            list:
+                title: 'user.list.title'
+                fields:
+                    - username
+                    - email
+                    - { property: stateName, template: 'easy_admin/translated' }
+                    - { property: roleName, template: 'easy_admin/translated' }
+                    - { property: updatedAt, format: 'd/m/Y' }
+                sort: ['updatedAt', 'DESC']
+                actions: ['show', 'edit', 'new', 'search']
+            new:
+                title: 'user.new.title'
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
+                    - { property: username }
+                    - { property: email }
+                    - { type: 'divider' }
+                    - { property: plainPassword, type: 'password', type_options: { required: true } }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
+                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
+                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
+            edit:
+                title: 'user.edit.title'
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
+                    - { property: username }
+                    - { property: email }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'user.form.admin.title', icon: 'gavel' }
+                    - { property: state, type: 'App\Form\Type\UserStateChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
+                    - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
+            show:
+                title: 'user.show.title'
+                fields:
+                    - id
+                    - username
+                    - email
+                    - { property: stateName, template: 'easy_admin/translated' }
+                    - { property: roleName, template: 'easy_admin/translated' }
+                    - { property: 'createdAt', format: 'd/m/Y' }
+                    - { property: 'updatedAt', format: 'd/m/Y' }
+        Room:
+            class: App\Entity\Room
+            label: 'Rooms'
+            list:
+                fields:
+                    - name
+                    - imageName
+                    - messages
+
+                title: 'room.list.title'
+                sort: ['messages', 'DESC']
+                actions: ['show', 'edit', 'new', 'search']
+            form:
+                fields:
+                    - name
+                    - imageName
+            new:
+                title: 'room.new.title'
+            edit:
+                title: 'room.new.title'
+            show:
+                title: 'room.show.title'
+                fields:
+                    - id
+                    - name
+                    - imageName
