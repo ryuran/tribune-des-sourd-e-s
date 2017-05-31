@@ -39,12 +39,15 @@ easy_admin:
                 sort: ['title', 'ASC']
             form:
                 fields:
-                    - { property: videoUrl, type: 'url' }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'article.form.categories.title', icon: 'tags' }
                     - title
                     - categories
                     - tags
+                    - { type: 'group', css_class: 'col-sm-6', label: 'article.form.link.title', icon: 'link' }
+                    - { property: videoUrl, type: 'url' }
                     - { property: sourceUrl, type: 'url', type_options: { required: false } }
                     - { property: imageUrl, type: 'url', type_options: { required: false } }
+                    - { type: 'group', css_class: 'col-sm-12', label: 'article.form.text.title', icon: 'file-text' }
                     - { property: description, type: 'ckeditor', type_options: { required: false } }
             new:
                 title: 'article.new.title'

@@ -15,6 +15,9 @@ article.list.title: 'Liste des reportages'
 article.new.title: 'Ajouter un reportage'
 article.edit.title: 'Modifier un reportage'
 article.show.title: Reportage
+article.form.text.title: 'Textes'
+article.form.link.title: 'Liens'
+article.form.categories.title: 'Titre, Catégories et Tags'
 Author: Auteur
 'Back to website': 'Retourner au site web'
 Category: Catégorie
