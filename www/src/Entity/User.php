@@ -205,6 +205,7 @@ class User implements UserInterface
     /**
      * @var integer
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(groups={"Admin"})
      */
     protected $state;
     /**
@@ -235,12 +236,12 @@ class User implements UserInterface
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(groups={"Login", "Register", "Forget"})
+     * @Assert\NotBlank(groups={"Login", "Register", "Forget", "Admin"})
      * @Assert\Regex(
      *     pattern= "/^[a-z0-9-_]{3,16}$/i",
      *     htmlPattern= "^[a-zA-Z0-9-_]+$",
      *     message= "Only 3-16 alphanumeric characters.",
-     *     groups={"Register", "Edit"}
+     *     groups={"Register", "Edit", "Admin"}
      * )
      */
     protected $username;
@@ -266,11 +267,11 @@ class User implements UserInterface
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank(groups={"Register"})
+     * @Assert\NotBlank(groups={"Register", "Admin"})
      * @Assert\Email(
      *     message= "The email is not a valid email.",
      *     checkMX= true,
-     *     groups={"Register", "Edit"}
+     *     groups={"Register", "Edit", "Admin"}
      * )
      */
     protected $email;
@@ -367,6 +368,7 @@ class User implements UserInterface
     /**
      * @var array
      * @ORM\Column(type="array")
+     * @Assert\NotBlank(groups={"Admin"})
      */
     protected $roles;
     /**

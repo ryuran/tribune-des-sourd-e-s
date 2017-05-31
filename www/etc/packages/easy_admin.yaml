@@ -133,6 +133,7 @@ easy_admin:
                 actions: ['show', 'edit', 'new', 'search']
             new:
                 title: 'user.new.title'
+                form_options: { validation_groups: ['Admin', 'Register'] }
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
                     - { property: username }
@@ -144,6 +145,7 @@ easy_admin:
                     - { property: role, type: 'App\Form\Type\UserRoleChoiceType', type_options: { required: true, choice_translation_domain: 'admin' } }
             edit:
                 title: 'user.edit.title'
+                form_options: { validation_groups: ['Admin'] }
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'user.form.basic.title', icon: 'user' }
                     - { property: username }
@@ -171,7 +173,7 @@ easy_admin:
                     - messages
 
                 title: 'room.list.title'
-                sort: ['messages', 'DESC']
+                sort: ['name', 'ASC']
                 actions: ['show', 'edit', 'new', 'search']
             form:
                 fields:
