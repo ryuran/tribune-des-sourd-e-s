@@ -27,7 +27,6 @@ class Message
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesFrom")
      * @ORM\JoinColumn(name="userFromId", referencedColumnName="id")
-     * @Assert\NotBlank()
      */
     protected $userFrom;
     /**
@@ -40,6 +39,9 @@ class Message
     public function setUserFrom(User $userFrom)
     {
         $this->userFrom = $userFrom;
+        if ($userFrom !== null) {
+            $this->userFromId = $userFrom->getId();
+        }
         return $this;
     }
 
@@ -71,7 +73,6 @@ class Message
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesTo")
      * @ORM\JoinColumn(name="userToId", referencedColumnName="id")
-     * @Assert\NotBlank()
      */
     protected $userTo;
     /**
@@ -84,6 +85,9 @@ class Message
     public function setUserTo(User $userTo)
     {
         $this->userTo = $userTo;
+        if ($userTo !== null) {
+            $this->userTo = $userTo->getId();
+        }
         return $this;
     }
 
@@ -115,7 +119,6 @@ class Message
      * @var Room|null
      * @ORM\ManyToOne(targetEntity="Room", inversedBy="messages")
      * @ORM\JoinColumn(name="roomId", referencedColumnName="id")
-     * @Assert\NotBlank()
      */
     protected $room;
     /**
@@ -128,6 +131,9 @@ class Message
     public function setRoom(Room $room)
     {
         $this->room = $room;
+        if ($room !== null) {
+            $this->roomId = $room->getId();
+        }
         return $this;
     }
 

@@ -43,7 +43,6 @@ class Article
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
-     * @Assert\NotBlank()
      */
     protected $user;
     /**
@@ -61,6 +60,9 @@ class Article
     public function setUser($user)
     {
         $this->user = $user;
+        if ($user !== null) {
+            $this->userId = $user->getId();
+        }
         return $this;
     }
 

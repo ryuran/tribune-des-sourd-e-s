@@ -3,15 +3,40 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Article;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Helper\StringHelper;
+use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends BackofficeController
 {
+    private function checkPermissions()
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user->hasRole(User::ROLES['admin'])) {
+            /** @var Article $article */
+            $article = $this->entity;
+
+            if (is_object($article) && $article->getUserId() !== $user->getId()) {
+                $this->denyAccessUnlessGranted(
+                    $user->getId(), $article, 'You do not have access to this article.'
+                );
+            }
+        }
+    }
+
+    protected function initialize(Request $request)
+    {
+        $response = parent::initialize($request);
+        $this->checkPermissions($request);
+        return $response;
+    }
+
     public function createNewEntity()
     {
         /** @var Article $article */
         $article = parent::createNewEntity();
-        $article->setUserId(1);
+        $article->setUser($this->getUser());
         return $article;
     }
 

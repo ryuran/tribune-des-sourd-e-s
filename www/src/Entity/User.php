@@ -413,6 +413,15 @@ class User implements UserInterface
         $this->roles = [$role];
         return $this;
     }
+    /**
+     * @param string $role
+     *
+     * @return $this
+     */
+    public function hasRole($role)
+    {
+        return in_array($role, $this->roles);
+    }
 
     /**
      * @var array

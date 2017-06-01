@@ -50,6 +50,9 @@ class Favorite
     public function setUser($user)
     {
         $this->user = $user;
+        if ($user !== null) {
+            $this->userId = $user->getId();
+        }
         return $this;
     }
 

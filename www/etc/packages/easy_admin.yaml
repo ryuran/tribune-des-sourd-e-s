@@ -12,7 +12,7 @@ easy_admin:
             - { label: 'Back to website', route: 'index', icon: 'home', role: ROLE_CONTRIBUTOR }
             - { label: 'Articles', role: ROLE_CONTRIBUTOR }
             - { entity: 'Article', label: 'Reports', icon: 'youtube-play', role: ROLE_CONTRIBUTOR }
-            - { entity: 'Category', label: 'Categories', icon: 'folder', role: ROLE_CONTRIBUTOR }
+            - { entity: 'Category', label: 'Categories', icon: 'folder', role: ROLE_ADMIN }
             - { label: 'Users', role: ROLE_ADMIN }
             - { entity: 'User', label: 'Users', icon: 'user', role: ROLE_ADMIN }
             - { label: 'Chat', role: ROLE_ADMIN }
@@ -27,12 +27,12 @@ easy_admin:
                 title: 'article.list.title'
                 fields:
                     - title
-                    - { property: videoUrl, template: 'easy_admin/short_url', label: 'Image' }
+                    - { property: videoUrl, template: 'easy_admin/short_url', label: 'Video' }
                     - { property: imageUrl, type: 'image', label: 'Image' }
                     - { property: categories, template: 'easy_admin/tags_collection' }
                     - viewCount
                     - favoriteCount
-                    - { property: user, label: 'Author' }
+                    - { property: user, label: 'Author', role: ROLE_ADMIN }
                     - { property: updatedAt, format: 'd/m/Y' }
                 sort: ['updatedAt', 'DESC']
                 actions: ['show', 'edit', 'new', 'search']
@@ -68,13 +68,13 @@ easy_admin:
                     - description
                     - viewCount
                     - favoriteCount
-                    - { property: user, label: 'Author' }
+                    - { property: user, label: 'Author', role: ROLE_ADMIN }
                     - { property: createdAt, format: 'd/m/Y' }
                     - { property: updatedAt, format: 'd/m/Y' }
         Category:
             class: App\Entity\Category
             label: 'Categories'
-            role: ROLE_CONTRIBUTOR
+            role: ROLE_ADMIN
             list:
                 fields:
                     - name
@@ -102,7 +102,7 @@ easy_admin:
         Tag:
             class: App\Entity\Tag
             label: 'Tags'
-            role: ROLE_CONTRIBUTOR
+            role: ROLE_ADMIN
             list:
                 fields:
                     - name

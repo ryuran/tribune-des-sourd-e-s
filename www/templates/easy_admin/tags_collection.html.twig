@@ -1,5 +1,9 @@
 {% set colors = field_options.label_colors|default(['primary']) %}
 
 {% for tag in value %}
-    <a class="label label-{{ cycle(colors, loop.index) }}" href="{{ path('easyadmin', link_parameters|merge({ id: tag.id })) }}">{{ tag | easyadmin_truncate }}</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="label label-{{ cycle(colors, loop.index) }}" href="{{ path('easyadmin', link_parameters|merge({ id: tag.id })) }}">{{ tag | easyadmin_truncate }}</a>
+    {% else %}
+        <span class="label label-{{ cycle(colors, loop.index) }}">{{ tag | easyadmin_truncate }}</span>
+    {% endif %}
 {% endfor %}
