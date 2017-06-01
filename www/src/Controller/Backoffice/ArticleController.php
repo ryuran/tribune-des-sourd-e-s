@@ -1,12 +1,11 @@
 <?php
-namespace App\Controller\Admin;
+namespace App\Controller\Backoffice;
 
 use App\Entity\Article;
 use App\Entity\Tag;
 use App\Helper\StringHelper;
-use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
-class ArticleController extends BaseAdminController
+class ArticleController extends BackofficeController
 {
     public function createNewEntity()
     {

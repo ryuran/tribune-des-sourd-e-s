@@ -25,6 +25,7 @@ class User implements UserInterface
      */
     const ROLES = [
         'user' => 'ROLE_USER',
+        'contributor' => 'ROLE_CONTRIBUTOR',
         'admin' => 'ROLE_ADMIN'
     ];
     /**

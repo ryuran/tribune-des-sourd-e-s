@@ -22,9 +22,10 @@ security:
           path:                       "^(/[a-zA-Z]{2})?/user/"
           roles:                      ROLE_USER
         -
-          path:                       "^(/[a-zA-Z]{2})?/admin/"
-          roles:                      ROLE_ADMIN
+          path:                       "^(/[a-zA-Z]{2})?/backoffice/"
+          roles:                      [ROLE_CONTRIBUTOR, ROLE_ADMIN]
 
     role_hierarchy:
         ROLE_USER:	                  []
-        ROLE_ADMIN:	                  [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_CONTRIBUTOR:	          [ROLE_USER]
+        ROLE_ADMIN:	                  [ROLE_CONTRIBUTOR, ROLE_USER, ROLE_ALLOWED_TO_SWITCH]

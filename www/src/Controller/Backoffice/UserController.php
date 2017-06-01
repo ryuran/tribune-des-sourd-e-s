@@ -1,10 +1,9 @@
 <?php
-namespace App\Controller\Admin;
+namespace App\Controller\Backoffice;
 
 use App\Entity\User;
-use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
-class UserController extends BaseAdminController
+class UserController extends BackofficeController
 {
     /**
      * @param User $user
