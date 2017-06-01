@@ -14,7 +14,7 @@ use App\Entity\User;
  */
 class UserRepository extends EntityRepository
 {
-    protected function prepare(int $status = User::ACTIVE): QueryBuilder
+    protected function prepare(int $status = User::STATES['active']): QueryBuilder
     {
         $query = $this->createQueryBuilder('u')
             ->select('u.id AS user_id')

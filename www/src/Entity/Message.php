@@ -6,7 +6,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
  * @ORM\Table(name="message")
  */
 class Message

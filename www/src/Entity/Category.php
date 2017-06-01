@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  * @ORM\Table(name="category",indexes={@ORM\Index(name="search_idx", columns={"slug", "name"})})
  */
 class Category

@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user",indexes={@ORM\Index(name="search_idx", columns={"username", "email"})})
  */
 class User implements UserInterface
