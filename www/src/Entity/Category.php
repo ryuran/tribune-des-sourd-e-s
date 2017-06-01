@@ -71,6 +71,7 @@ class Category
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $name;
     /**
@@ -118,6 +119,7 @@ class Category
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $imageName;
     /**

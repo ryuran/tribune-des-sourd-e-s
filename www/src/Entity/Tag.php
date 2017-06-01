@@ -71,6 +71,7 @@ class Tag
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $name;
     /**

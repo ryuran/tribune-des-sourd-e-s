@@ -26,6 +26,7 @@ class Message
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesFrom")
      * @ORM\JoinColumn(name="userFromId", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $userFrom;
     /**
@@ -44,6 +45,7 @@ class Message
     /**
      * @var null|integer
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $userFromId;
     /**
@@ -68,6 +70,7 @@ class Message
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesTo")
      * @ORM\JoinColumn(name="userToId", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $userTo;
     /**
@@ -86,6 +89,7 @@ class Message
     /**
      * @var null|integer
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     protected $userToId;
     /**
@@ -110,6 +114,7 @@ class Message
      * @var Room|null
      * @ORM\ManyToOne(targetEntity="Room", inversedBy="messages")
      * @ORM\JoinColumn(name="roomId", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $room;
     /**
@@ -128,6 +133,7 @@ class Message
     /**
      * @var null|integer
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     protected $roomId;
     /**
@@ -151,6 +157,7 @@ class Message
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $fileName;
     /**

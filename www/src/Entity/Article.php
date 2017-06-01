@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -42,6 +43,7 @@ class Article
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $user;
     /**
@@ -65,6 +67,7 @@ class Article
     /**
      * @var integer
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     private $userId;
     /**
@@ -206,6 +209,7 @@ class Article
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $title;
     /**
@@ -276,6 +280,8 @@ class Article
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Url()
      */
     protected $videoUrl;
     /**
@@ -322,6 +328,7 @@ class Article
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url()
      */
     protected $sourceUrl;
     /**
