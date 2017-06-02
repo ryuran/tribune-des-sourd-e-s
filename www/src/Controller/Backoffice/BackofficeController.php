@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BackofficeController extends BaseAdminController
 {
-    private function checkPermissions(Request $request)
+    private function checkEntityPermissions(Request $request)
     {
         $easyAdmin = isset($this->request) ? $this->request->attributes->get('easyadmin') : $request->attributes->get('easyadmin');
         if (isset($easyAdmin['entity']['role'])) {
@@ -21,7 +21,7 @@ class BackofficeController extends BaseAdminController
     protected function initialize(Request $request)
     {
         $response = parent::initialize($request);
-        $this->checkPermissions($request);
+        $this->checkEntityPermissions($request);
         return $response;
     }
 }

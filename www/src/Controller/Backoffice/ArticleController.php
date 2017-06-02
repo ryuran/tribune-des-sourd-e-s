@@ -5,39 +5,44 @@ use App\Entity\Article;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Helper\StringHelper;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\QueryBuilder;
 
 class ArticleController extends BackofficeController
 {
-    private function checkPermissions()
+    private function checkObjectPermissions($article)
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user->hasRole(User::ROLES['admin'])) {
-            /** @var Article $article */
-            $article = $this->entity;
-
-            if (is_object($article) && $article->getUserId() !== $user->getId()) {
+            if ($article->getUserId() !== $user->getId()) {
                 $this->denyAccessUnlessGranted(
-                    $user->getId(), $article, 'You do not have access to this article.'
+                    $user->getId(), $this->entity, 'You do not have access to this article.'
                 );
             }
         }
     }
 
-    protected function initialize(Request $request)
-    {
-        $response = parent::initialize($request);
-        $this->checkPermissions($request);
-        return $response;
-    }
-
+    /**
+     * @return Article
+     */
     public function createNewEntity()
     {
         /** @var Article $article */
         $article = parent::createNewEntity();
         $article->setUser($this->getUser());
         return $article;
+    }
+
+    /**
+     * @param Article $article
+     * @param array  $entityProperties
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    protected function createEditForm($article, array $entityProperties)
+    {
+        $this->checkObjectPermissions($article);
+        return parent::createEditForm($article, $entityProperties);
     }
 
     /**
@@ -56,10 +61,17 @@ class ArticleController extends BackofficeController
      */
     public function preUpdateEntity($article)
     {
+        $this->checkObjectPermissions($article);
         $this->fillImageUrl($article);
         $this->addNewTags($article);
 
         parent::preUpdateEntity($article);
+    }
+
+    protected function preRemoveEntity($entity)
+    {
+        $this->checkObjectPermissions($entity);
+        return parent::preRemoveEntity($entity);
     }
 
     /**
@@ -112,5 +124,27 @@ class ArticleController extends BackofficeController
                 $article->addTag($exitedTag);
             }
         }
+    }
+
+    protected function createListQueryBuilder($entityClass, $sortDirection, $sortField = null, $dqlFilter = null)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        /** @var QueryBuilder $query */
+        $query = parent::createListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter);
+        $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
+
+        return $query;
+    }
+
+    protected function createSearchQueryBuilder($entityClass, $searchQuery, array $searchableFields, $sortField = null, $sortDirection = null, $dqlFilter = null)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        /** @var QueryBuilder $query */
+        $query = parent::createSearchQueryBuilder($entityClass, $searchQuery, $searchableFields, $sortField, $sortDirection);
+        $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
+
+        return $query;
     }
 }
