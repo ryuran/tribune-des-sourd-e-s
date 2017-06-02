@@ -32,7 +32,7 @@ class Favorite
     /**
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="favorites")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
     /**
@@ -82,7 +82,7 @@ class Favorite
     /**
      * @var Article|null
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="favorites")
-     * @ORM\JoinColumn(name="articleId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     protected $article;
     /**

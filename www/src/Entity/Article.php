@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Table(name="article",indexes={@ORM\Index(name="search_idx", columns={"slug", "title"})})
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Article
 {
@@ -42,7 +43,7 @@ class Article
     /**
      * @var User|null
      * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
     /**
@@ -461,5 +462,35 @@ class Article
     {
         $this->updatedAt = $updatedAt;
         return $this;
+    }
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+    /**
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+    /**
+     * @param $deletedAt
+     *
+     * @return $this
+     */
+    public function setDeletedAt(\DateTime $deletedAt = null)
+    {
+        $this->deletedAt = $deletedAt;
+        return $this;
+    }
+    /**
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return $this->deletedAt !== null;
     }
 }

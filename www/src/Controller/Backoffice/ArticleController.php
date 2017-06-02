@@ -6,18 +6,19 @@ use App\Entity\Tag;
 use App\Entity\User;
 use App\Helper\StringHelper;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Form\FormBuilder;
 
 class ArticleController extends BackofficeController
 {
     /**
-     * @param Article $article
+     * @param Article $entity
      */
-    private function checkObjectPermissions($article)
+    private function checkObjectPermissions($entity)
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user->hasRole(User::ROLES['admin'])) {
-            if ($article->getUserId() !== $user->getId()) {
+            if ($entity->getUserId() !== $user->getId() || $entity->isDeleted()) {
                 $this->denyAccessUnlessGranted(
                     $user->getId(), $this->entity, 'You do not have access to this article.'
                 );
@@ -30,54 +31,68 @@ class ArticleController extends BackofficeController
      */
     public function createNewEntity()
     {
-        /** @var Article $article */
-        $article = parent::createNewEntity();
-        $article->setUser($this->getUser());
-        return $article;
+        /** @var Article $entity */
+        $entity = parent::createNewEntity();
+        $entity->setUser($this->getUser());
+        return $entity;
     }
 
     /**
-     * @param Article $article
+     * @param Article $entity
      * @param array  $entityProperties
      *
      * @return \Symfony\Component\Form\Form
      */
-    protected function createEditForm($article, array $entityProperties)
+    protected function createEditForm($entity, array $entityProperties)
     {
-        $this->checkObjectPermissions($article);
-        return parent::createEditForm($article, $entityProperties);
+        $this->checkObjectPermissions($entity);
+        return parent::createEditForm($entity, $entityProperties);
     }
 
     /**
-     * @param Article $article
+     * @param Article $entity
+     * @param string $view
+     *
+     * @return \Symfony\Component\Form\Form
      */
-    public function prePersistEntity($article)
+    protected function createEntityFormBuilder($entity, $view)
     {
-        $this->fillImageUrl($article);
-        $this->addNewTags($article);
+        /** @var FormBuilder $form */
+        $form = parent::createEntityFormBuilder($entity, $view);
 
-        parent::prePersistEntity($article);
+        return $form;
     }
 
     /**
-     * @param Article $article
+     * @param Article $entity
      */
-    public function preUpdateEntity($article)
+    public function prePersistEntity($entity)
     {
-        $this->checkObjectPermissions($article);
-        $this->fillImageUrl($article);
-        $this->addNewTags($article);
+        $this->fillImageUrl($entity);
+        $this->addNewTags($entity);
 
-        parent::preUpdateEntity($article);
+        parent::prePersistEntity($entity);
     }
 
     /**
-     * @param Article $article
+     * @param Article $entity
      */
-    protected function preRemoveEntity($article)
+    public function preUpdateEntity($entity)
     {
-        $this->checkObjectPermissions($article);
-        return parent::preRemoveEntity($article);
+        $this->checkObjectPermissions($entity);
+        $this->fillImageUrl($entity);
+        $this->addNewTags($entity);
+
+        parent::preUpdateEntity($entity);
+    }
+
+    /**
+     * @param Article $entity
+     */
+    protected function preRemoveEntity($entity)
+    {
+        $this->checkObjectPermissions($entity);
+        return parent::preRemoveEntity($entity);
     }
 
     /**
@@ -162,5 +177,27 @@ class ArticleController extends BackofficeController
         }
 
         return $query;
+    }
+
+    public function undeleteAction()
+    {
+        $id = $this->request->query->get('id');
+        /** @var Article $entity */
+        $entity = $this->em->getRepository('App:Article')->find($id);
+        $entity->setDeletedAt();
+        $this->em->flush();
+
+        $refererUrl = $this->request->query->get('referer', '');
+        return !empty($refererUrl)
+            ? $this->redirect(urldecode($refererUrl))
+            : $this->redirect($this->generateUrl(
+                'easyadmin', [
+                    'action' => 'search',
+                    'entity' => $this->request->query->get('entity'),
+                    'query' => $this->request->query->get('query'),
+                    'sortField' => $this->request->query->get('sortField'),
+                    'sortDirection' => $this->request->query->get('sortDirection'),
+                    'page' => $this->request->query->get('page'),
+                ]));
     }
 }

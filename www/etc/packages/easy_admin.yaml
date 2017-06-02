@@ -35,7 +35,7 @@ easy_admin:
                     - { property: user, label: 'Author', role: ROLE_ADMIN }
                     - { property: updatedAt, format: 'd/m/Y' }
                 sort: ['updatedAt', 'DESC']
-                actions: ['show', 'edit', 'new', 'search']
+                actions: ['show', 'edit', 'new', 'search', 'undelete']
             search:
                 sort: ['title', 'ASC']
             form:
@@ -138,7 +138,7 @@ easy_admin:
                     - { property: roleName, template: 'easy_admin/translated' }
                     - { property: updatedAt, format: 'd/m/Y' }
                 sort: ['updatedAt', 'DESC']
-                actions: ['show', 'edit', 'new', 'search']
+                actions: ['show', 'edit', 'new', 'search', 'undelete']
             new:
                 title: 'user.new.title'
                 form_options: { validation_groups: ['Admin', 'Register'] }
