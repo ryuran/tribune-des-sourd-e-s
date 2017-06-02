@@ -138,8 +138,9 @@ class ArticleController extends BackofficeController
         $user = $this->getUser();
         /** @var QueryBuilder $query */
         $query = parent::createListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter);
-        $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
-
+        if (!$user->hasRole(User::ROLES['admin'])) {
+            $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
+        }
         return $query;
     }
 
@@ -156,7 +157,9 @@ class ArticleController extends BackofficeController
         /** @var QueryBuilder $query */
         $query = parent::createSearchQueryBuilder(
             $entityClass, $searchQuery, $searchableFields, $sortField, $sortDirection);
-        $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
+        if (!$user->hasRole(User::ROLES['admin'])) {
+            $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
+        }
 
         return $query;
     }
