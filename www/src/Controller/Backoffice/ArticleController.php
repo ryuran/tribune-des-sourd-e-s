@@ -9,6 +9,9 @@ use Doctrine\ORM\QueryBuilder;
 
 class ArticleController extends BackofficeController
 {
+    /**
+     * @param Article $article
+     */
     private function checkObjectPermissions($article)
     {
         /** @var User $user */
@@ -68,10 +71,13 @@ class ArticleController extends BackofficeController
         parent::preUpdateEntity($article);
     }
 
-    protected function preRemoveEntity($entity)
+    /**
+     * @param Article $article
+     */
+    protected function preRemoveEntity($article)
     {
-        $this->checkObjectPermissions($entity);
-        return parent::preRemoveEntity($entity);
+        $this->checkObjectPermissions($article);
+        return parent::preRemoveEntity($article);
     }
 
     /**
@@ -111,7 +117,7 @@ class ArticleController extends BackofficeController
 
             foreach ($notExistedTags as $tag) {
                 $exitedTag = $manager->getRepository('App:Tag')
-                    ->findOneBySlug(StringHelper::slugify($tag));
+                    ->findOneBy(['slug' => StringHelper::slugify($tag)]);
 
                 if (!$exitedTag) {
                     $exitedTag = new Tag();
@@ -137,12 +143,19 @@ class ArticleController extends BackofficeController
         return $query;
     }
 
-    protected function createSearchQueryBuilder($entityClass, $searchQuery, array $searchableFields, $sortField = null, $sortDirection = null, $dqlFilter = null)
-    {
+    protected function createSearchQueryBuilder(
+        $entityClass,
+        $searchQuery,
+        array $searchableFields,
+        $sortField = null,
+        $sortDirection = null,
+        $dqlFilter = null
+    ) {
         /** @var User $user */
         $user = $this->getUser();
         /** @var QueryBuilder $query */
-        $query = parent::createSearchQueryBuilder($entityClass, $searchQuery, $searchableFields, $sortField, $sortDirection);
+        $query = parent::createSearchQueryBuilder(
+            $entityClass, $searchQuery, $searchableFields, $sortField, $sortDirection);
         $query->andWhere('entity.userId = :userId')->setParameter('userId', $user->getId());
 
         return $query;
