@@ -8,3 +8,56 @@ User: Utilisateur
 Users: Utilisateurs
 Tag: Tag
 Tags: Tags
+
+'Bad credentials.': 'Mauvais identifiants.'
+'You have received an email to validate your account.': 'Vous avez reçu un mail pour valider votre compte.'
+'We have sent an email an email to validate your account.': 'Nous vous avons envoyé un mail pour valider votre compte.'
+'Your account is disabled. Please contact the administrator.': 'Votre compte est désactivé. Veuillez contacter l''administrateur.'
+'Your account is locked. Check and valid your email account.': 'Votre compte n''est pas activé. Veuiller cliquer sur le lien de validation reçu par mail.'
+'Full authentication is required to access this resource.': 'Vous devez être connecté pour accéder à cette page.'
+'Link expired.': 'Le lien a expiré.'
+'You account has been validated.': 'Votre compte a été validé.'
+'A email was sent with a link to reset your password.': 'Un email vous a été envoyé avec un lien pour renouveler votre mot de passe.'
+'Your account has been deleted.': 'Votre compte a été supprimé.'
+'Your session is no longer valid.': 'Votre session n''est plus valide.'
+'You have been disconnected.': 'Vous avez été deconnecté.'
+'No user exists with this username.': 'Aucun utilisateur n''existe avec ce nom d''utilisateur.'
+'You are not authorized to do that.': 'Vous n''êtes pas autorisé à faire ça.'
+Email: Email
+Username: 'Nom d''utilisateur'
+username: 'Nom d''utilisateur'
+Lastname: Nom
+Firstname: Prénom
+'Username or email': 'Nom d''utilisateur ou Email'
+'Plain password': 'Mot de passe'
+plainPassword: 'Mot de passe'
+Password: 'Mot de passe'
+'Repeat password': 'Répétition du mot de passe'
+Status: Statut
+Roles: Droits
+Register: 'S''inscrire'
+Registration: Inscription
+Connection: Connexion
+'Log in': 'S''identifier'
+Logout: Deconnexion
+'Reset password': 'Nouveau mot de passe'
+'Forgot password': 'Mot de passe oublié'
+'View profile': 'Voir le profil'
+'View my profile': 'Voir mon profil'
+'Edit profile': 'Modifier le profil'
+'Edit my profile': 'Modifier mon profil'
+'My profile': 'Mon profil'
+Profile: Profil
+'To unsubscribe': 'Se désinscrire'
+'My parameters': 'Mes paramètres'
+Settings: Paramètres
+'Register with': 'S''inscrire avec %service%'
+'Login with': 'Se connecter avec %service%'
+'Unable to connect to this service.': 'Impossible de se connecter à ce service.'
+'This service is not configured.': 'Ce service n''est pas configuré'
+'Connection was canceled.': 'La connexion a été annulé.'
+'Connection was interrupted.': 'La connexion a été interrompu.'
+'Permissions are not sufficient.': 'Les autorisations ne sont pas suffisantes.'
+'This account is already associated with another user.': 'Ce compte est déjà associé à un autre utilisateur.'
+'Connection is successful.': 'La connexion est réussi'
+'Currrent tab will close in a few seconds.': 'L''onglet va se fermer dans quelques secondes'
