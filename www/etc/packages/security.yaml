@@ -16,6 +16,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\UserAuthenticator
+            logout:
+                path:   /logout
+                target: /
 
     access_control:
         -
