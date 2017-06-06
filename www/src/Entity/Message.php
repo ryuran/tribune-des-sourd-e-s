@@ -47,7 +47,7 @@ class Message
 
     /**
      * @var null|integer
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
     protected $userFromId;
