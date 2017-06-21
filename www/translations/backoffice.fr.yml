@@ -34,6 +34,8 @@ Existing tags: Tags existants
 Favorite: Favori
 Favorites: Favoris
 'Favorite count': 'Nb. favoris'
+File: Fichier
+Files: Fichiers
 ID: ID
 'Image url': 'URL de l''image'
 'Image name': 'Nom de l''image'
@@ -42,10 +44,13 @@ Link: Lien
 Links: Liens
 Message: Message
 Messages: Messages
+Mime type: Type
 contributor: Contributeur
 Name: Nom
 New tags: Nouveaux tags
 'Plain password': 'Mot de passe'
+Path: Chemin
+Remove custom image: Supprimer l'image personnalisée
 Report: Reportage
 Reports: Reportages
 Role: Rôle
@@ -56,6 +61,7 @@ room.new.title: 'Ajouter un salon'
 room.edit.title: 'Modifier un salon'
 room.show.title: Salon
 'Role name': Rôle
+Size: Poids
 State: Statut
 'State name': Statut
 'Source url': 'URL de la source'

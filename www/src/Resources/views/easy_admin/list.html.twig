@@ -5,6 +5,7 @@
     {% for action_name, action_config in _list_item_actions %}
         {% if (action_name in ['show', 'edit', 'delete'] and (item.deletedAt is not defined or item.deletedAt is null))
             or (action_name in ['undelete'] and item.deletedAt is defined and item.deletedAt is not null)
+            or (action_name in ['removeCustomImage'] and item.imageName is defined and item.imageName is not null)
         %}
             {% set filtered_actions = filtered_actions|merge([action_config]) %}
         {% endif %}

@@ -15,6 +15,11 @@ parameters:
     user_update:      index
     user_unsubscribe: index
 
+    file_upload: uploads
+    file_room_upload: rooms
+    file_category_upload: categories
+    file_article_upload: articles
+
 services:
     App\Service\Mailer:
         autowire: true

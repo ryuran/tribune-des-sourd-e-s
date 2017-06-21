@@ -4,12 +4,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Table(name="article",indexes={@ORM\Index(name="search_idx", columns={"slug", "title"})})
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ * @Vich\Uploadable
  */
 class Article
 {
@@ -305,6 +308,11 @@ class Article
         return $this;
     }
 
+    public function getImage()
+    {
+        return $this->imageName ? $this->imageName : $this->imageUrl;
+    }
+
     /**
      * @var null|string
      * @ORM\Column(type="string", length=255)
@@ -325,6 +333,59 @@ class Article
     public function setImageUrl($imageUrl)
     {
         $this->imageUrl = $imageUrl;
+        return $this;
+    }
+
+    /**
+     * @var null|string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $imageName;
+    /**
+     * @return null|string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+    /**
+     * @param string $imageName
+     *
+     * @return $this
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+        return $this;
+    }
+
+    /**
+     * @Assert\File(
+     *     maxSize="8M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="article_images", fileNameProperty="imageName")
+     * @var File
+     */
+    private $imageFile;
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+    /**
+     * @param File $image
+     *
+     * @return $this
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
         return $this;
     }
 

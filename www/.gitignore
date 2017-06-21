@@ -3,6 +3,7 @@
 /var/
 /vendor/
 /web/bundles/
+/web/uploads/
 ###< symfony/framework-bundle ###
 ###> symfony/web-server-bundle ###
 .web-server-pid
