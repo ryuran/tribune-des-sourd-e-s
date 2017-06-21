@@ -28,14 +28,14 @@ easy_admin:
                 fields:
                     - title
                     - { property: videoUrl, template: 'easy_admin/short_url', label: 'Video' }
-                    - { property: imageUrl, type: 'image', label: 'Image' }
+                    - { property: image, type: 'image', label: 'Image', base_path: /%file_upload%/%file_article_upload% }
                     - { property: categories, template: 'easy_admin/tags_collection' }
                     - viewCount
                     - favoriteCount
                     - { property: user, label: 'Author', role: ROLE_ADMIN }
                     - { property: updatedAt, format: 'd/m/Y' }
                 sort: ['updatedAt', 'DESC']
-                actions: ['show', 'edit', 'new', 'search', 'undelete']
+                actions: ['show', 'edit', 'new', 'search', 'undelete', 'removeCustomImage']
             search:
                 sort: ['title', 'ASC']
             form:
@@ -47,7 +47,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Links', icon: 'link' }
                     - { property: videoUrl, type: 'url' }
                     - { property: sourceUrl, type: 'url', type_options: { required: false } }
-                    - { property: imageUrl, type: 'url', type_options: { required: false } }
+                    - { property: imageFile, type: 'file', label: 'Image' }
                     - { type: 'group', css_class: 'col-sm-6', label: 'Tags', icon: 'tags' }
                     - { property: tags, label: 'Existing tags'}
                     - { property: newTags, type: 'collection' }
@@ -64,7 +64,7 @@ easy_admin:
                     - { property: categories, template: 'easy_admin/tags_collection' }
                     - { property: tags, template: 'easy_admin/tags_collection' }
                     - { property: sourceUrl, type: 'url' }
-                    - { property: imageUrl, type: 'image', label: 'Image' }
+                    - { property: image, type: 'image', label: 'Image', base_path: /%file_upload%/%file_article_upload% }
                     - description
                     - viewCount
                     - favoriteCount
@@ -78,7 +78,7 @@ easy_admin:
             list:
                 fields:
                     - name
-                    - { property: imageName, label: 'Image' }
+                    - { property: 'imageName', type: 'image', label: 'Image', base_path: /%file_upload%/%file_category_upload% }
                     - articles
                 title: 'category.list.title'
                 sort: ['name', 'ASC']
@@ -86,17 +86,17 @@ easy_admin:
             form:
                 fields:
                     - name
-                    - imageName
+                    - { property: imageFile, type: 'file', label: 'Image' }
             new:
                 title: 'category.new.title'
             edit:
-                title: 'category.new.title'
+                title: 'category.edit.title'
             show:
                 title: 'category.show.title'
                 fields:
                     - id
                     - name
-                    - { property: imageName, label: 'Image' }
+                    - { property: 'imageName', type: 'image', label: 'Image', base_path: /%file_upload%/%file_category_upload% }
                     - articles
 
         Tag:
@@ -116,7 +116,7 @@ easy_admin:
             new:
                 title: 'tag.new.title'
             edit:
-                title: 'tag.new.title'
+                title: 'tag.edit.title'
             show:
                 title: 'tag.show.title'
                 fields:
@@ -178,7 +178,7 @@ easy_admin:
             list:
                 fields:
                     - name
-                    - { property: imageName, label: 'Image' }
+                    - { property: 'imageName', type: 'image', label: 'Image', base_path: /%file_upload%/%file_room_upload% }
                     - messages
 
                 title: 'room.list.title'
@@ -187,14 +187,36 @@ easy_admin:
             form:
                 fields:
                     - name
-                    - imageName
+                    - { property: imageFile, type: 'file', label: 'Image' }
             new:
                 title: 'room.new.title'
             edit:
-                title: 'room.new.title'
+                title: 'room.edit.title'
             show:
                 title: 'room.show.title'
                 fields:
                     - id
                     - name
-                    - { property: imageName, label: 'Image' }
+                    - { property: 'imageName', type: 'image', label: 'Image', base_path: /%file_upload%/%file_room_upload% }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        room_images:
+            uri_prefix:         /%file_upload%/%file_room_upload%
+            upload_destination: %kernel.root_dir%/../web/%file_upload%/%file_room_upload%
+            namer:
+                service: vich_uploader.namer_property
+                options: { property: 'slug'}
+        category_images:
+            uri_prefix:         /%file_upload%/%file_category_upload%
+            upload_destination: %kernel.root_dir%/../web/%file_upload%/%file_category_upload%
+            namer:
+                service: vich_uploader.namer_property
+                options: { property: 'slug'}
+        article_images:
+            uri_prefix:         /%file_upload%/%file_article_upload%
+            upload_destination: %kernel.root_dir%/../web/%file_upload%/%file_article_upload%
+            namer:
+                service: vich_uploader.namer_property
+                options: { property: 'slug'}

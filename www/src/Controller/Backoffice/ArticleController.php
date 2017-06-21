@@ -100,7 +100,7 @@ class ArticleController extends BackofficeController
      */
     private function fillImageUrl($article)
     {
-        if ($article->getVideoUrl() && !$article->getImageUrl()) {
+        if ($article->getVideoUrl()) {
             parse_str(parse_url($article->getVideoUrl(), PHP_URL_QUERY), $vars);
             if (isset($vars['v'])) {
                 $article->setImageUrl('http://img.youtube.com/vi/' . $vars['v'] . '/mqdefault.jpg');
@@ -186,18 +186,33 @@ class ArticleController extends BackofficeController
         $entity = $this->em->getRepository('App:Article')->find($id);
         $entity->setDeletedAt();
         $this->em->flush();
+        return $this->toRedirect();
+    }
 
+    public function removeCustomImageAction()
+    {
+        $id = $this->request->query->get('id');
+        /** @var Article $entity */
+        $entity = $this->em->getRepository('App:Article')->find($id);
+        $this->get('vich_uploader.upload_handler')->remove($entity, 'imageFile');
+        $entity->setImageName(null);
+        $this->em->flush();
+        return $this->toRedirect();
+    }
+
+    public function toRedirect()
+    {
         $refererUrl = $this->request->query->get('referer', '');
         return !empty($refererUrl)
             ? $this->redirect(urldecode($refererUrl))
             : $this->redirect($this->generateUrl(
                 'easyadmin', [
-                    'action' => 'search',
-                    'entity' => $this->request->query->get('entity'),
-                    'query' => $this->request->query->get('query'),
-                    'sortField' => $this->request->query->get('sortField'),
-                    'sortDirection' => $this->request->query->get('sortDirection'),
-                    'page' => $this->request->query->get('page'),
-                ]));
+                'action' => 'search',
+                'entity' => $this->request->query->get('entity'),
+                'query' => $this->request->query->get('query'),
+                'sortField' => $this->request->query->get('sortField'),
+                'sortDirection' => $this->request->query->get('sortDirection'),
+                'page' => $this->request->query->get('page'),
+            ]));
     }
 }
