@@ -5,8 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="favorite")
+ * @ORM\Entity(repositoryClass="App\Repository\FavoriteRepository")
+ * @ORM\Table(name="favorite", uniqueConstraints={@ORM\UniqueConstraint(name="favorite_unique", columns={"user_id", "article_id"})})
  */
 class Favorite
 {

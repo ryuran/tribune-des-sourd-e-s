@@ -476,6 +476,15 @@ class Article
         $this->favoriteCount++;
         return $this;
     }
+    /**
+     * Ajoute un décompte de favori
+     * @return $this
+     */
+    public function decreaseFavoriteCount()
+    {
+        $this->favoriteCount--;
+        return $this;
+    }
 
     /**
      * @var \DateTime
