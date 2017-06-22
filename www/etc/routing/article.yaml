@@ -1,0 +1,31 @@
+article_index:
+  path:     /reportages
+  defaults: { _controller: 'App\Controller\ArticleController::indexAction' }
+
+article_top:
+  path:     /reportages/top/{number}
+  defaults: { _controller: 'App\Controller\ArticleController::topAction', number: 10 }
+
+article_category:
+  path:     /reportages/categorie/{category}
+  defaults: { _controller: 'App\Controller\ArticleController::categoryAction' }
+
+category_index:
+  path:     /categories
+  defaults: { _controller: 'App\Controller\ArticleController::categoriesAction' }
+
+article:
+  path:     /reportage/{slug}
+  defaults: { _controller: 'App\Controller\ArticleController::articleAction' }
+
+article_favorite:
+  path:     /user/reportage/{slug}/favorite
+  defaults: { _controller: 'App\Controller\ArticleController::favoriteAction' }
+
+article_unfavorite:
+  path:     /user/reportage/{slug}/unfavorite
+  defaults: { _controller: 'App\Controller\ArticleController::unfavoriteAction' }
+
+article_favorites:
+  path:     /user/favorites
+  defaults: { _controller: 'App\Controller\ArticleController::favoritesAction' }
