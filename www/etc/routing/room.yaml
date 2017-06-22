@@ -1,0 +1,7 @@
+room_index:
+  path:     /salons
+  defaults: { _controller: 'App\Controller\RoomController::indexAction' }
+
+room:
+  path:     /salon/{slug}
+  defaults: { _controller: 'App\Controller\RoomController::roomAction' }
