@@ -25,22 +25,22 @@ class Message
 
     /**
      * @var User|null
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesFrom")
+     * @ORM\JoinColumn(name="user_from_id", referencedColumnName="id")
      */
-    protected $user;
+    protected $userFrom;
     /**
      * @return User|null
      */
-    public function getUser()
+    public function getUserFrom()
     {
-        return $this->user;
+        return $this->userFrom;
     }
-    public function setUser(User $user)
+    public function setUserFrom(User $userFrom)
     {
-        $this->user = $user;
-        if ($user !== null) {
-            $this->userId = $user->getId();
+        $this->userFrom = $userFrom;
+        if ($userFrom !== null) {
+            $this->userFromId = $userFrom->getId();
         }
         return $this;
     }
@@ -50,25 +50,71 @@ class Message
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
-    protected $userId;
+    protected $userFromId;
     /**
      * @return null|integer
      */
-    public function getUserId()
+    public function getUserFromId()
     {
-        return $this->userId;
+        return $this->userFromId;
     }
     /**
-     * @param integer $userId
+     * @param integer $userFromId
      *
      * @return $this
      */
-    public function setUserId($userId)
+    public function setUserFromId($userFromId)
     {
-        $this->userId = $userId;
+        $this->userFromId = $userFromId;
         return $this;
     }
-    
+
+    /**
+     * @var User|null
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesTo")
+     * @ORM\JoinColumn(name="user_to_id", referencedColumnName="id")
+     */
+    protected $userTo;
+    /**
+     * @return User|null
+     */
+    public function getUserTo()
+    {
+        return $this->userTo;
+    }
+    public function setUserTo(User $userTo)
+    {
+        $this->userTo = $userTo;
+        if ($userTo !== null) {
+            $this->userTo = $userTo->getId();
+        }
+        return $this;
+    }
+
+    /**
+     * @var null|integer
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     */
+    protected $userToId;
+    /**
+     * @return null|integer
+     */
+    public function getUserToId()
+    {
+        return $this->userToId;
+    }
+    /**
+     * @param integer $userToId
+     *
+     * @return $this
+     */
+    public function setUserToId($userToId)
+    {
+        $this->userToId = $userToId;
+        return $this;
+    }
+
     /**
      * @var Room|null
      * @ORM\ManyToOne(targetEntity="Room", inversedBy="messages")

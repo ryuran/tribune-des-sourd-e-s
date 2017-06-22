@@ -48,7 +48,8 @@ class User implements UserInterface
         $this->initToken();
         $this->articles = new ArrayCollection();
         $this->favorites = new ArrayCollection();
-        $this->messages = new ArrayCollection();
+        $this->messagesFrom = new ArrayCollection();
+        $this->messagesTo = new ArrayCollection();
     }
 
     public function __toString()
@@ -139,34 +140,67 @@ class User implements UserInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="userFrom")
      */
-    protected $messages;
+    protected $messagesFrom;
     /**
      * @return ArrayCollection
      */
-    public function getMessages()
+    public function getMessagesFrom()
     {
-        return $this->messages;
+        return $this->messagesFrom;
     }
     /**
-     * @param Message $message
+     * @param Message $messageFrom
      *
      * @return $this
      */
-    public function addMessage(Message $message)
+    public function addMessageFrom(Message $messageFrom)
     {
-        $this->messages[] = $message;
+        $this->messagesFrom[] = $messageFrom;
         return $this;
     }
     /**
-     * @param Message $message
+     * @param Message $messageFrom
      *
      * @return $this
      */
-    public function removeMessage(Message $message)
+    public function removeMessageFrom(Message $messageFrom)
     {
-        $this->messages->removeElement($message);
+        $this->messagesFrom->removeElement($messageFrom);
+        return $this;
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="userTo")
+     */
+    protected $messagesTo;
+    /**
+     * @return ArrayCollection
+     */
+    public function getMessagesTo()
+    {
+        return $this->messagesTo;
+    }
+    /**
+     * @param Message $messageTo
+     *
+     * @return $this
+     */
+    public function addMessageTo(Message $messageTo)
+    {
+        $this->messagesTo[] = $messageTo;
+        return $this;
+    }
+    /**
+     * @param Message $messageTo
+     *
+     * @return $this
+     */
+    public function removeMessageTo(Message $messageTo)
+    {
+        $this->messagesTo->removeElement($messageTo);
         return $this;
     }
 
