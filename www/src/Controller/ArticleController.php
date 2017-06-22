@@ -17,9 +17,9 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-        $articles = $this->getDoctrine()->getManager()->getRepository('App:Article')->findBy([
+        $articles = $this->getDoctrine()->getManager()->getRepository('App:Article')->findBy(
             [], ['updatedAt' => 'DESC']
-        ]);
+        );
 
         return $this->render('Article/index.html.twig', ['articles' => $articles]);
     }
@@ -37,9 +37,9 @@ class ArticleController extends Controller
             $this->redirectToRoute('article_top');
         }
 
-        $articles = $this->getDoctrine()->getManager()->getRepository('App:Article')->findBy([
+        $articles = $this->getDoctrine()->getManager()->getRepository('App:Article')->findBy(
             [], ['viewCount' => 'DESC', 'favoriteCount' => 'DESC', 'updatedAt' => 'DESC'], $number
-        ]);
+        );
 
         return $this->render('Article/top.html.twig', ['number' => $number, 'articles' => $articles]);
     }
@@ -63,9 +63,9 @@ class ArticleController extends Controller
      */
     public function categoriesAction()
     {
-        $categories = $this->getDoctrine()->getManager()->getRepository('App:Category')->findBy([
+        $categories = $this->getDoctrine()->getManager()->getRepository('App:Category')->findBy(
             [], ['name' => 'ASC']
-        ]);
+        );
 
         return $this->render('Article/categories.html.twig', ['categories' => $categories]);
     }
@@ -116,7 +116,7 @@ class ArticleController extends Controller
         $favorite = $favoriteRepository->exist($user, $article)->getQuery()->getOneOrNullResult();
 
         if ($favorite !== null) {
-
+            exit;
         }
 
         $favorite = new Favorite();
@@ -147,15 +147,13 @@ class ArticleController extends Controller
         $favorite = $favoriteRepository->exist($user, $article)->getQuery()->getOneOrNullResult();
 
         if ($favorite === null) {
-
+            exit;
         }
 
-        if ($favorite instanceof Favorite) {
-            $article->decreaseFavoriteCount();
+        $article->decreaseFavoriteCount();
 
-            $em->remove($favorite);
-            $em->remove($article);
-            $em->flush();
-        }
+        $em->remove($favorite);
+        $em->persist($article);
+        $em->flush();
     }
 }
