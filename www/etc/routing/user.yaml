@@ -1,7 +1,6 @@
 user_register:
   path:     /register
   defaults: { _controller: 'App\Controller\User\RegistrationController::registerAction' }
-  
 
 user_validate:
   path:     /validate/{user_token}
@@ -23,8 +22,8 @@ user_reset:
   requirements:
     user_token: "[a-zA-Z0-9]+"
 
-user_edit:
-  path:     /user/edit
+user_profile:
+  path:     /user/profile
   defaults: { _controller: 'App\Controller\User\LoggedController::editAction' }
 
 user_unsubscribe:
@@ -34,11 +33,3 @@ user_unsubscribe:
 user_logout:
   path:     /logout
   defaults: { _controller: 'App\Controller\User\LoggedController::logoutAction' }
-
-user_oauth_connect:
-  path:     /connect/{service}
-  defaults: { _controller: Core'App\Controller\User\OauthController::connectAction' }
-
-user_oauth_callback:
-  path:     /callback/{service}
-  defaults: { _controller: Core'App\Controller\User\OauthController::callbackAction' }
