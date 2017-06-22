@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,5 +13,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-
+    public function findByCategory(Category $category)
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.categories', 'c')
+            ->where('c.id = :category')->setParameter('category', $category->getId())
+            ->orderBy('a.updatedAt', 'DESC');
+    }
 }

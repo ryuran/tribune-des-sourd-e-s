@@ -5,6 +5,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Favorite;
 use App\Entity\User;
+use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,7 +54,11 @@ class ArticleController extends Controller
      */
     public function categoryAction(Category $category)
     {
-        return $this->render('Article/category.html.twig', ['category' => $category]);
+        /** @var ArticleRepository $articleRepository */
+        $articleRepository = $this->getDoctrine()->getManager()->getRepository('App:Article');
+        $articles = $articleRepository->findByCategory($category)->getQuery()->getResult();
+
+        return $this->render('Article/category.html.twig', ['category' => $category, 'articles' => $articles]);
     }
 
     /**
@@ -96,6 +101,12 @@ class ArticleController extends Controller
      */
     public function favoritesAction()
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        $favorites = $this->getDoctrine()->getManager()->getRepository('App:Favorite')->findBy(
+            ['userId' => $user->getId()], ['createdAt' => 'DESC']
+        );
+
         return $this->render('Article/favorites.html.twig');
     }
 
